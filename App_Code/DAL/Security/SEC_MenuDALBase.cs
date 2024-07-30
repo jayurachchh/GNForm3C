@@ -6,6 +6,8 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using GNForm3C.ENT;
+using AjaxControlToolkit.HTMLEditor.ToolbarButton;
+using System.Activities.Statements;
 
 namespace GNForm3C.DAL
 {
@@ -285,9 +287,10 @@ namespace GNForm3C.DAL
 				return null;
 			}
 		}
-		public DataTable SelectPage(SqlInt32 PageOffset, SqlInt32 PageSize, out Int32 TotalRecords)
+		public DataTable SelectPage(SqlInt32 PageOffset, SqlInt32 PageSize, out Int32 TotalRecords,
+			SqlInt32 ParentMenuID,SqlString MenuName, SqlString MenuDisplayName, SqlString FormName,SqlInt32 Sequence)
 		{
-			TotalRecords = 0;
+            TotalRecords = 0;
 			try
 			{
 				SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
@@ -295,8 +298,13 @@ namespace GNForm3C.DAL
 				sqlDB.AddInParameter(dbCMD, "@PageOffset", SqlDbType.Int, PageOffset);
 				sqlDB.AddInParameter(dbCMD, "@PageSize", SqlDbType.Int, PageSize);
 				sqlDB.AddOutParameter(dbCMD, "@TotalRecords", SqlDbType.Int, 4);
+                sqlDB.AddInParameter(dbCMD, "@ParentMenuID", SqlDbType.Int, ParentMenuID);
+                sqlDB.AddInParameter(dbCMD, "@MenuName", SqlDbType.NVarChar, MenuName);
+                sqlDB.AddInParameter(dbCMD, "@MenuDisplayName", SqlDbType.NVarChar, MenuDisplayName);
+                sqlDB.AddInParameter(dbCMD, "@FormName", SqlDbType.NVarChar, FormName);
+                sqlDB.AddInParameter(dbCMD, "@Sequence", SqlDbType.Int, Sequence);
 
-				DataTable dtSEC_Menu = new DataTable("PR_SEC_Menu_SelectPage");
+                DataTable dtSEC_Menu = new DataTable("PR_SEC_Menu_SelectPage");
 
 				DataBaseHelper DBH = new DataBaseHelper();
 				DBH.LoadDataTable(sqlDB, dbCMD, dtSEC_Menu);

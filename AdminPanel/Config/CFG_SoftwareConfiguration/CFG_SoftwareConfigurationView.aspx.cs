@@ -87,8 +87,8 @@ public partial class AdminPanel_Config_CFG_SoftwareConfiguration_CFG_SoftwareCon
 						if (!dr["AllowIncrementalSearchinGrid"].Equals(DBNull.Value))
 							lblAllowIncrementalSearchinGrid.Text = Convert.ToString(dr["AllowIncrementalSearchinGrid"]);
 
-						if (!dr["HospitalID"].Equals(DBNull.Value))
-							lblHospitalID.Text = Convert.ToString(dr["HospitalID"]);
+						if (!dr["Hospital"].Equals(DBNull.Value))
+							lblHospitalID.Text = Convert.ToString(dr["Hospital"]);
 
 						if (!dr["WeeklyBackupPath"].Equals(DBNull.Value))
 						{
@@ -106,8 +106,8 @@ public partial class AdminPanel_Config_CFG_SoftwareConfiguration_CFG_SoftwareCon
 						if (!dr["Remarks"].Equals(DBNull.Value))
 							lblRemarks.Text = Convert.ToString(dr["Remarks"]);
 
-						if (!dr["UserID"].Equals(DBNull.Value))
-							lblUserID.Text = Convert.ToString(dr["UserID"]);
+						if (!dr["UserName"].Equals(DBNull.Value))
+							lblUserID.Text = Convert.ToString(dr["UserName"]);
 
 						if (!dr["Created"].Equals(DBNull.Value))
 							lblCreated.Text = Convert.ToDateTime(dr["Created"]).ToString(CV.DefaultDateTimeFormat);

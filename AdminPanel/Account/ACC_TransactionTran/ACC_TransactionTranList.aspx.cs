@@ -50,7 +50,7 @@ public partial class AdminPanel_ACC_TransactionTran_ACC_TransactionTranList : Sy
             #endregion 12.2 Set Default Value
 
             Search(1);
-	    #region 12.3 Set Help Text
+            #region 12.3 Set Help Text
             ucHelp.ShowHelp("Help Text will be shown here");
             #endregion 12.3 Set Help Text
         }
@@ -141,7 +141,7 @@ public partial class AdminPanel_ACC_TransactionTran_ACC_TransactionTranList : Sy
 
         ACC_TransactionTranBAL balACC_TransactionTran = new ACC_TransactionTranBAL();
 
-        DataTable dt = balACC_TransactionTran.SelectPage(Offset, PageRecordSize, out TotalRecords, TransactionID, Patient);
+        DataTable dt = balACC_TransactionTran.SelectPage(Offset, PageRecordSize, out TotalRecords, TransactionID, Patient, SubTreatmentID, Quantity, Unit, Rate, Amount);
 
         if(PageRecordSize == 0 && dt.Rows.Count > 0)
         {
@@ -373,7 +373,7 @@ public partial class AdminPanel_ACC_TransactionTran_ACC_TransactionTranList : Sy
             	Offset = (Convert.ToInt32(ViewState["CurrentPage"]) - 1) * PageRecordSize;
 
         ACC_TransactionTranBAL balACC_TransactionTran = new ACC_TransactionTranBAL();
-        DataTable dtACC_TransactionTran = balACC_TransactionTran.SelectPage(Offset, PageRecordSize, out TotalReceivedRecord, TransactionID, Patient);
+        DataTable dtACC_TransactionTran = balACC_TransactionTran.SelectPage(Offset, PageRecordSize, out TotalReceivedRecord, TransactionID, Patient, SubTreatmentID, Quantity, Unit, Rate, Amount);
         if (dtACC_TransactionTran != null && dtACC_TransactionTran.Rows.Count > 0)
 		{
             Session["ExportTable"] = dtACC_TransactionTran;
@@ -420,6 +420,7 @@ public partial class AdminPanel_ACC_TransactionTran_ACC_TransactionTranList : Sy
 		txtUnit.Text = String.Empty;
 		txtRate.Text = String.Empty;
 		txtAmount.Text = String.Empty;
+        txtPatient.Text = String.Empty;
 		CommonFunctions.BindEmptyRepeater(rpData);
        		Div_SearchResult.Visible = false;
         	Div_ExportOption.Visible = false;

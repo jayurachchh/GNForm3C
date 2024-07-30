@@ -113,10 +113,14 @@ namespace GNForm3C.BAL
 			CFG_ReportSettingDAL dalCFG_ReportSetting = new CFG_ReportSettingDAL();
 			return dalCFG_ReportSetting.SelectAll();
 		}
-		public DataTable SelectPage(SqlInt32 PageOffset, SqlInt32 PageSize, out Int32 TotalRecords)
+		public DataTable SelectPage(SqlInt32 PageOffset, SqlInt32 PageSize, out Int32 TotalRecords, SqlString ReportHeaderFontType, SqlDecimal ReportHeaderFontSize, SqlString ReportHeaderFontStyle,
+            SqlString TableHeaderFontType, SqlDecimal TableHeaderFontSize, SqlString TableHeaderFontStyle,
+            SqlString TableRowFontType, SqlDecimal TableRowFontSize, SqlString TableRowFontStyle,
+            SqlString FooterFontType, SqlDecimal FooterFontSize, SqlString FooterFontStyle,
+            SqlInt32 HospitalID)
 		{
 			CFG_ReportSettingDAL dalCFG_ReportSetting = new CFG_ReportSettingDAL();
-			return dalCFG_ReportSetting.SelectPage(PageOffset, PageSize, out TotalRecords);
+			return dalCFG_ReportSetting.SelectPage(PageOffset, PageSize, out TotalRecords, ReportHeaderFontType, ReportHeaderFontSize, ReportHeaderFontStyle, TableHeaderFontType, TableHeaderFontSize, TableHeaderFontStyle, TableRowFontType, TableRowFontSize, TableRowFontStyle, FooterFontType, FooterFontSize, FooterFontStyle, HospitalID);
 		}
 
 		#endregion SelectOperation

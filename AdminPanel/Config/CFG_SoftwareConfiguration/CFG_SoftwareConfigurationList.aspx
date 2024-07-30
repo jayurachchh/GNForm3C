@@ -273,7 +273,7 @@
                                                             	<%#Eval("AllowIncrementalSearchinGrid") %>
                                                             </td>
                                                             <td>
-                                                            	<%#Eval("HospitalID") %>
+                                                            	<%#Eval("Hospital") %>
                                                             </td>
                                                             <td>
                                                             	<%#Eval("WeeklyBackupPassword") %>

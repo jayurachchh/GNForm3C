@@ -125,7 +125,7 @@ public partial class AdminPanel_SEC_User_SEC_UserList : System.Web.UI.Page
 
         SEC_UserBAL balSEC_User = new SEC_UserBAL();
 
-        DataTable dt = balSEC_User.SelectPage(Offset, PageRecordSize, out TotalRecords);
+        DataTable dt = balSEC_User.SelectPage(Offset, PageRecordSize, out TotalRecords, UserName, Password, HospitalID);
 
         if(PageRecordSize == 0 && dt.Rows.Count > 0)
         {
@@ -340,7 +340,7 @@ public partial class AdminPanel_SEC_User_SEC_UserList : System.Web.UI.Page
             	Offset = (Convert.ToInt32(ViewState["CurrentPage"]) - 1) * PageRecordSize;
 
         SEC_UserBAL balSEC_User = new SEC_UserBAL();
-        DataTable dtSEC_User = balSEC_User.SelectPage(Offset, PageRecordSize, out TotalReceivedRecord);
+        DataTable dtSEC_User = balSEC_User.SelectPage(Offset, PageRecordSize, out TotalReceivedRecord, UserName, Password, HospitalID);
         if (dtSEC_User != null && dtSEC_User.Rows.Count > 0)
 		{
             Session["ExportTable"] = dtSEC_User;

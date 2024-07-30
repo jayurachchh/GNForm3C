@@ -107,6 +107,7 @@ public partial class AdminPanel_CFG_SoftwareConfiguration_CFG_SoftwareConfigurat
         SqlString ShortcutKeys_DoubleClicK = SqlString.Null;
         SqlInt32 HospitalID = SqlInt32.Null;
         SqlString WeeklyBackupPassword = SqlString.Null;
+
         Int32 Offset = (PageNo - 1) * PageRecordSize;
         Int32 TotalRecords = 0;
 		Int32 TotalPages = 1;
@@ -141,7 +142,7 @@ public partial class AdminPanel_CFG_SoftwareConfiguration_CFG_SoftwareConfigurat
 
         CFG_SoftwareConfigurationBAL balCFG_SoftwareConfiguration = new CFG_SoftwareConfigurationBAL();
 
-        DataTable dt = balCFG_SoftwareConfiguration.SelectPage(Offset, PageRecordSize, out TotalRecords);
+        DataTable dt = balCFG_SoftwareConfiguration.SelectPage(Offset, PageRecordSize, out TotalRecords, SaveMessage_NoMessageJustClosetheform, SaveMessage_ShowMessageClosetheform, SaveMessage_ShowMessageAskforOtherRecord, ShortcutKeys_EditOnEnterKeyinListPage, ShortcutKeys_DoubleClicK, HospitalID, WeeklyBackupPassword);
 
         if(PageRecordSize == 0 && dt.Rows.Count > 0)
         {
@@ -372,7 +373,7 @@ public partial class AdminPanel_CFG_SoftwareConfiguration_CFG_SoftwareConfigurat
             	Offset = (Convert.ToInt32(ViewState["CurrentPage"]) - 1) * PageRecordSize;
 
         CFG_SoftwareConfigurationBAL balCFG_SoftwareConfiguration = new CFG_SoftwareConfigurationBAL();
-        DataTable dtCFG_SoftwareConfiguration = balCFG_SoftwareConfiguration.SelectPage(Offset, PageRecordSize, out TotalReceivedRecord);
+        DataTable dtCFG_SoftwareConfiguration = balCFG_SoftwareConfiguration.SelectPage(Offset, PageRecordSize, out TotalReceivedRecord, SaveMessage_NoMessageJustClosetheform, SaveMessage_ShowMessageClosetheform, SaveMessage_ShowMessageAskforOtherRecord, ShortcutKeys_EditOnEnterKeyinListPage, ShortcutKeys_DoubleClicK, HospitalID, WeeklyBackupPassword);
         if (dtCFG_SoftwareConfiguration != null && dtCFG_SoftwareConfiguration.Rows.Count > 0)
 		{
             Session["ExportTable"] = dtCFG_SoftwareConfiguration;

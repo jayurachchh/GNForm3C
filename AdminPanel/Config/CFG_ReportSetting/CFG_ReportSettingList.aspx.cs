@@ -165,7 +165,7 @@ public partial class AdminPanel_CFG_ReportSetting_CFG_ReportSettingList : System
 
         CFG_ReportSettingBAL balCFG_ReportSetting = new CFG_ReportSettingBAL();
 
-        DataTable dt = balCFG_ReportSetting.SelectPage(Offset, PageRecordSize, out TotalRecords);
+        DataTable dt = balCFG_ReportSetting.SelectPage(Offset, PageRecordSize, out TotalRecords, ReportHeaderFontType, ReportHeaderFontSize, ReportHeaderFontStyle, TableHeaderFontType, TableHeaderFontSize, TableHeaderFontStyle, TableRowFontType, TableRowFontSize, TableRowFontStyle, FooterFontType, FooterFontSize, FooterFontStyle, HospitalID);
 
         if(PageRecordSize == 0 && dt.Rows.Count > 0)
         {
@@ -420,7 +420,7 @@ public partial class AdminPanel_CFG_ReportSetting_CFG_ReportSettingList : System
             	Offset = (Convert.ToInt32(ViewState["CurrentPage"]) - 1) * PageRecordSize;
 
         CFG_ReportSettingBAL balCFG_ReportSetting = new CFG_ReportSettingBAL();
-        DataTable dtCFG_ReportSetting = balCFG_ReportSetting.SelectPage(Offset, PageRecordSize, out TotalReceivedRecord);
+        DataTable dtCFG_ReportSetting = balCFG_ReportSetting.SelectPage(Offset, PageRecordSize, out TotalReceivedRecord, ReportHeaderFontType, ReportHeaderFontSize, ReportHeaderFontStyle, TableHeaderFontType, TableHeaderFontSize, TableHeaderFontStyle, TableRowFontType, TableRowFontSize, TableRowFontStyle, FooterFontType, FooterFontSize, FooterFontStyle, HospitalID);
         if (dtCFG_ReportSetting != null && dtCFG_ReportSetting.Rows.Count > 0)
 		{
             Session["ExportTable"] = dtCFG_ReportSetting;

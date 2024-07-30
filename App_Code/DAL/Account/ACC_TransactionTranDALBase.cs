@@ -290,9 +290,10 @@ namespace GNForm3C.DAL
 				return null;
 			}
 		}
-        public DataTable SelectPage(SqlInt32 PageOffset, SqlInt32 PageSize, out Int32 TotalRecords, SqlInt32 TransactionID, SqlString Patient)
+        public DataTable SelectPage(SqlInt32 PageOffset, SqlInt32 PageSize, out Int32 TotalRecords, SqlInt32 TransactionID, 
+			SqlString Patient,SqlInt32 SubTreatmentID,SqlInt32 Quantity,SqlString Unit,SqlDecimal Rate,SqlDecimal Amount)
 		{
-			TotalRecords = 0;
+            TotalRecords = 0;
 			try
 			{
 				SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
@@ -302,10 +303,13 @@ namespace GNForm3C.DAL
 				sqlDB.AddOutParameter(dbCMD, "@TotalRecords", SqlDbType.Int, 4);
 				sqlDB.AddInParameter(dbCMD, "@TransactionID", SqlDbType.Int, TransactionID);
                 sqlDB.AddInParameter(dbCMD, "@Patient", SqlDbType.VarChar, Patient);
+                sqlDB.AddInParameter(dbCMD, "@SubTreatmentID", SqlDbType.Int, SubTreatmentID);
+                sqlDB.AddInParameter(dbCMD, "@Quantity", SqlDbType.Int, Quantity);
+                sqlDB.AddInParameter(dbCMD, "@Unit", SqlDbType.VarChar, Unit);
+                sqlDB.AddInParameter(dbCMD, "@Rate", SqlDbType.Decimal, Rate);
+                sqlDB.AddInParameter(dbCMD, "@Amount", SqlDbType.Decimal, Amount);
 
-
-
-				DataTable dtACC_TransactionTran = new DataTable("PR_ACC_TransactionTran_SelectPage");
+                DataTable dtACC_TransactionTran = new DataTable("PR_ACC_TransactionTran_SelectPage");
 
 				DataBaseHelper DBH = new DataBaseHelper();
 				DBH.LoadDataTable(sqlDB, dbCMD, dtACC_TransactionTran);

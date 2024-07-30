@@ -132,7 +132,7 @@ public partial class AdminPanel_SEC_Menu_SEC_MenuList : System.Web.UI.Page
 
         SEC_MenuBAL balSEC_Menu = new SEC_MenuBAL();
 
-        DataTable dt = balSEC_Menu.SelectPage(Offset, PageRecordSize, out TotalRecords);
+        DataTable dt = balSEC_Menu.SelectPage(Offset, PageRecordSize, out TotalRecords, ParentMenuID, MenuName, MenuDisplayName, FormName, Sequence);
 
         if(PageRecordSize == 0 && dt.Rows.Count > 0)
         {
@@ -355,7 +355,7 @@ public partial class AdminPanel_SEC_Menu_SEC_MenuList : System.Web.UI.Page
             	Offset = (Convert.ToInt32(ViewState["CurrentPage"]) - 1) * PageRecordSize;
 
         SEC_MenuBAL balSEC_Menu = new SEC_MenuBAL();
-        DataTable dtSEC_Menu = balSEC_Menu.SelectPage(Offset, PageRecordSize, out TotalReceivedRecord);
+        DataTable dtSEC_Menu = balSEC_Menu.SelectPage(Offset, PageRecordSize, out TotalReceivedRecord, ParentMenuID, MenuName, MenuDisplayName, FormName, Sequence);
         if (dtSEC_Menu != null && dtSEC_Menu.Rows.Count > 0)
 		{
             Session["ExportTable"] = dtSEC_Menu;

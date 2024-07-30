@@ -180,7 +180,7 @@ public partial class AdminPanel_ACC_Transaction_ACC_TransactionList : System.Web
 
         ACC_TransactionBAL balACC_Transaction = new ACC_TransactionBAL();
 
-        DataTable dt = balACC_Transaction.SelectPage(Offset, PageRecordSize, out TotalRecords, Patient, TreatmentID);
+        DataTable dt = balACC_Transaction.SelectPage(Offset, PageRecordSize, out TotalRecords, Patient, TreatmentID, Amount, SerialNo, ReferenceDoctor, Count, ReceiptNo, Date, DateOfAdmission, DateOfDischarge, Deposite, NetAmount, NoOfDays, HospitalID, FinYearID, ReceiptTypeID);
 
         if(PageRecordSize == 0 && dt.Rows.Count > 0)
         {
@@ -447,7 +447,7 @@ public partial class AdminPanel_ACC_Transaction_ACC_TransactionList : System.Web
             	Offset = (Convert.ToInt32(ViewState["CurrentPage"]) - 1) * PageRecordSize;
 
         ACC_TransactionBAL balACC_Transaction = new ACC_TransactionBAL();
-        DataTable dtACC_Transaction = balACC_Transaction.SelectPage(Offset, PageRecordSize, out TotalReceivedRecord, Patient, TreatmentID);
+        DataTable dtACC_Transaction = balACC_Transaction.SelectPage(Offset, PageRecordSize, out TotalReceivedRecord, Patient, TreatmentID, Amount, SerialNo, ReferenceDoctor, Count, ReceiptNo, Date, DateOfAdmission, DateOfDischarge, Deposite, NetAmount, NoOfDays, HospitalID, FinYearID, ReceiptTypeID);
         if (dtACC_Transaction != null && dtACC_Transaction.Rows.Count > 0)
 		{
             Session["ExportTable"] = dtACC_Transaction;

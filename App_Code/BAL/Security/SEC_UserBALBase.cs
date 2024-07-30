@@ -113,10 +113,10 @@ namespace GNForm3C.BAL
 			SEC_UserDAL dalSEC_User = new SEC_UserDAL();
 			return dalSEC_User.SelectAll();
 		}
-		public DataTable SelectPage(SqlInt32 PageOffset, SqlInt32 PageSize, out Int32 TotalRecords)
+		public DataTable SelectPage(SqlInt32 PageOffset, SqlInt32 PageSize, out Int32 TotalRecords, SqlString UserName, SqlString Password, SqlInt32 HospitalID)
 		{
 			SEC_UserDAL dalSEC_User = new SEC_UserDAL();
-			return dalSEC_User.SelectPage(PageOffset, PageSize, out TotalRecords);
+			return dalSEC_User.SelectPage(PageOffset, PageSize, out TotalRecords, UserName, Password, HospitalID);
 		}
 
 		#endregion SelectOperation

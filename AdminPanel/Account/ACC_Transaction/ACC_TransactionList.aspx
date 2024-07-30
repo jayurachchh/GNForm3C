@@ -294,7 +294,7 @@
                                                     </th>
                                                     <th><asp:Label ID="lbhReceiptNo" runat="server" Text="Receipt No"></asp:Label>
                                                     </th>
-                                                    <th class="text-center"><asp:Label ID="lbhDate" runat="server" Text="Date"></asp:Label>
+                                                    <th class="text-center"><asp:Label ID="lbhDate" runat="server" Text="Date of patient"></asp:Label>
                                                     </th>
                                                     <th><asp:Label ID="lbhDateOfAdmission" runat="server" Text="Date Of Admission"></asp:Label>
                                                     </th>
@@ -308,7 +308,7 @@
                                                     </th>
                                                     <th><asp:Label ID="lbhHospitalID" runat="server" Text="Hospital"></asp:Label>
                                                     </th>
-                                                    <th><asp:Label ID="lbhFinYearID" runat="server" Text="Fin Year"></asp:Label>
+                                                    <th><asp:Label ID="lbhFinYearID" runat="server" Text="Finicial Year"></asp:Label>
                                                     </th>
                                                     <th><asp:Label ID="lbhReceiptTypeID" runat="server" Text="Receipt Type"></asp:Label>
                                                     </th>
@@ -349,10 +349,10 @@
                                                             	<%#Eval("Date", GNForm3C.CV.DefaultDateFormatForGrid) %>
                                                             </td>
                                                             <td>
-                                                            	<%#Eval("DateOfAdmission") %>
+                                                            	<%#Eval("DateOfAdmission",GNForm3C.CV.DefaultDateFormatForGrid) %>
                                                             </td>
                                                             <td>
-                                                            	<%#Eval("DateOfDischarge") %>
+                                                            	<%#Eval("DateOfDischarge",GNForm3C.CV.DefaultDateFormatForGrid) %>
                                                             </td>
                                                             <td>
                                                             	<%#Eval("Deposite") %>
@@ -364,17 +364,17 @@
                                                             	<%#Eval("NoOfDays") %>
                                                             </td>
                                                             <td>
-                                                            	<%#Eval("HospitalID") %>
+                                                            	<%#Eval("Hospital") %>
                                                             </td>
                                                             <td>
-                                                            	<%#Eval("FinYearID") %>
+                                                            	<%#Eval("FinYearName") %>
                                                             </td>
                                                             <td>
-                                                            	<%#Eval("ReceiptTypeID") %>
+                                                            	<%#Eval("ReceiptTypeName") %>
                                                             </td>
                                                             <td class="text-nowrap text-center">
                                                                 <asp:HyperLink ID="hlView" SkinID="View" NavigateUrl='<%# "~/AdminPanel/Account/ACC_Transaction/ACC_TransactionView.aspx?TransactionID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("TransactionID").ToString()) %>' data-target="#viewiFrameReg" data-toggle="modal" runat="server"></asp:HyperLink>
-								<asp:HyperLink ID="hlEdit" SkinID="Edit" NavigateUrl='<%# "~/AdminPanel/Account/ACC_Transaction/ACC_TransactionAddEdit.aspx?TransactionID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("TransactionID").ToString()) %>' runat="server"></asp:HyperLink>
+								                                <asp:HyperLink ID="hlEdit" SkinID="Edit" NavigateUrl='<%# "~/AdminPanel/Account/ACC_Transaction/ACC_TransactionAddEdit.aspx?TransactionID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("TransactionID").ToString()) %>' runat="server"></asp:HyperLink>
                                                                 <asp:LinkButton ID="lbtnDelete" runat="server"
                                                                     SkinID="Delete"
                                                                     OnClientClick="javascript:return confirm('Are you sure you want to delete record ? ');"

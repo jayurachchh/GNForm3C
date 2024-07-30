@@ -94,8 +94,6 @@
                         <%=GNForm3C.CV.DefaultUniversityNameHTML %>                            
                     </span>
                     <span class="page-logo-text-sidebar-closed"><%=GNForm3C.CV.DefaultUniversityShortNameHTML %>  </span>
-
-
                 </div>
 
                 <!-- END LOGO -->
@@ -411,12 +409,12 @@
                                 <ul class="sub-menu" style="display: none;">
                                     <li class="nav-item  ">
                                         <a href='<%=ResolveClientUrl("~/AdminPanel/Security/SEC_Menu/SEC_MenuList.aspx") %>' class="nav-link ">
-                                            <span class="title">Expense Type</span>
+                                            <span class="title">Menu List</span>
                                         </a>
                                     </li>
                                     <li class="nav-item  ">
                                         <a href='<%=ResolveClientUrl("~/AdminPanel/Security/SEC_User/SEC_UserList.aspx") %>' class="nav-link ">
-                                            <span class="title">Financial Year</span>
+                                            <span class="title">User List</span>
                                         </a>
                                     </li>
                                 </ul>

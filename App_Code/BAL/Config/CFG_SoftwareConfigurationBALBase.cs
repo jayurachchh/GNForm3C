@@ -113,10 +113,14 @@ namespace GNForm3C.BAL
 			CFG_SoftwareConfigurationDAL dalCFG_SoftwareConfiguration = new CFG_SoftwareConfigurationDAL();
 			return dalCFG_SoftwareConfiguration.SelectAll();
 		}
-		public DataTable SelectPage(SqlInt32 PageOffset, SqlInt32 PageSize, out Int32 TotalRecords)
+		public DataTable SelectPage(SqlInt32 PageOffset, SqlInt32 PageSize, out Int32 TotalRecords, SqlString SaveMessage_NoMessageJustClosetheform, SqlString SaveMessage_ShowMessageClosetheform, SqlString SaveMessage_ShowMessageAskforOtherRecord,
+            SqlString ShortcutKeys_EditOnEnterKeyinListPage, SqlString ShortcutKeys_DoubleClicK,
+            SqlInt32 HospitalID, SqlString WeeklyBackupPassword)
 		{
 			CFG_SoftwareConfigurationDAL dalCFG_SoftwareConfiguration = new CFG_SoftwareConfigurationDAL();
-			return dalCFG_SoftwareConfiguration.SelectPage(PageOffset, PageSize, out TotalRecords);
+            return dalCFG_SoftwareConfiguration.SelectPage(PageOffset, PageSize, out TotalRecords, SaveMessage_NoMessageJustClosetheform, SaveMessage_ShowMessageClosetheform, 
+			SaveMessage_ShowMessageAskforOtherRecord, ShortcutKeys_EditOnEnterKeyinListPage, ShortcutKeys_DoubleClicK,
+            HospitalID, WeeklyBackupPassword);
 		}
 
 		#endregion SelectOperation
