@@ -419,6 +419,20 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-user"></i>
+                                    <span class="title">Student</span>
+                                    <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu" style="display: none;">
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Student/StudentDetails/Stu_StudentList.aspx") %>' class="nav-link ">
+                                            <span class="title">Student Details</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
 
                         </ul>
                         <!-- END SIDEBAR MENU -->

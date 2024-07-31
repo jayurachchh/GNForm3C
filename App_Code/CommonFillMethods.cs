@@ -178,5 +178,43 @@ namespace GNForm3C
             ddl.DataBind();
             ddl.Items.Insert(0, new ListItem("Select User", "-99"));
         }
+        public static void FillDropDownListCurrentSem(DropDownList ddl)
+        {
+            // Clear existing items
+            ddl.Items.Clear();
+
+            // Add static items "Yes" and "No"
+            //ddl.Items.Add(new ListItem("Select"));
+            ddl.Items.Insert(0, new ListItem("Select Current Sem", "-99"));
+            ddl.Items.Add(new ListItem("1", "1"));
+            ddl.Items.Add(new ListItem("2", "2"));
+            ddl.Items.Add(new ListItem("3", "3"));
+            ddl.Items.Add(new ListItem("4", "4"));
+            ddl.Items.Add(new ListItem("5", "5"));
+            ddl.Items.Add(new ListItem("6", "6"));
+            ddl.Items.Add(new ListItem("7", "7"));
+            ddl.Items.Add(new ListItem("8", "8"));
+            ddl.Items.Add(new ListItem("9", "9"));
+            ddl.Items.Add(new ListItem("10", "10"));
+            
+
+            // Set default selected item to "Yes"
+            ddl.SelectedIndex = 0;  // This sets "Yes" as the default selected item
+        }
+        public static void FillDropDownListGender(DropDownList ddl)
+        {
+            // Clear existing items
+            ddl.Items.Clear();
+
+            // Add static items "Yes" and "No"
+            //ddl.Items.Add(new ListItem("Select"));
+            ddl.Items.Insert(0, new ListItem("Select Gender", "-99"));
+            ddl.Items.Add(new ListItem("Male", "Male"));
+            ddl.Items.Add(new ListItem("Female", "Female"));
+
+            // Set default selected item to "Yes"
+            ddl.SelectedIndex = 0;  // This sets "Yes" as the default selected item
+        }
+
     }
 }

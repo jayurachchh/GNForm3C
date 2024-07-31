@@ -1,19 +1,20 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Default/MasterPage.master" AutoEventWireup="true" CodeFile="SEC_MenuList.aspx.cs" Inherits="AdminPanel_SEC_Menu_SEC_MenuList" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default/MasterPage.master" AutoEventWireup="true" CodeFile="Stu_StudentList.aspx.cs" Inherits="AdminPanel_Student_StudentDetails_Stu_StudentList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphPageHeader" runat="Server">
-	<asp:Label ID="lblPageHeader_XXXXX" runat="server" Text="Menu"></asp:Label>
-	<small><asp:Label ID="lblPageHeaderInfo_XXXXX" runat="server" Text="Security"></asp:Label></small>
-	<span class="pull-right">
-        	<small>
-	            <asp:HyperLink ID="hlShowHelp" SkinID="hlShowHelp" runat="server"></asp:HyperLink>
-        	</small>
-	</span>	
+    <asp:Label ID="lblPageHeader_XXXXX" runat="server" Text="Student Detail"></asp:Label>
+    <small>
+        <asp:Label ID="lblPageHeaderInfo_XXXXX" runat="server" Text="Student"></asp:Label></small>
+    <span class="pull-right">
+        <small>
+            <asp:HyperLink ID="hlShowHelp" SkinID="hlShowHelp" runat="server"></asp:HyperLink>
+        </small>
+    </span>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="cphBreadcrumb" runat="Server">
     <li>
-		<i class="fa fa-home"></i>
+        <i class="fa fa-home"></i>
         <asp:HyperLink ID="hlHome" runat="server" NavigateUrl="~/AdminPanel/Default.aspx" Text="Home"></asp:HyperLink>
         <i class="fa fa-angle-right"></i>
     </li>
@@ -21,7 +22,6 @@
         <asp:Label ID="lblBreadCrumbLast" runat="server" Text="Menu"></asp:Label>
     </li>
 </asp:Content>
-
 <asp:Content ID="Content4" ContentPlaceHolderID="cphPageContent" runat="Server">
     <!--Help Text-->
     <ucHelp:ShowHelp ID="ucHelp" runat="server" />
@@ -29,9 +29,9 @@
     <asp:ScriptManager ID="sm" runat="server">
     </asp:ScriptManager>
 
-    <%-- Search --%> 
-    <asp:UpdatePanel ID="upApplicationFeature" runat="server">
-        <ContentTemplate>			
+    <%-- Search --%>
+  <asp:UpdatePanel ID="upApplicationFeature" runat="server">
+        <ContentTemplate>
             <div class="portlet light">
                 <div class="portlet-title">
                     <div class="caption">
@@ -45,60 +45,92 @@
                 <div class="portlet-body form">
                     <div role="form">
                         <div class="form-body">
-							<div class="row">
-								<div class="col-md-4">
-									<div class="form-group">
-										<div class="input-group">
-											<span class="input-group-addon">
-												<i class="fa fa-search"></i>
-											</span>
-											<asp:TextBox ID="txtParentMenuID" CssClass="First form-control" runat="server"  PlaceHolder="Enter Parent Menu"></asp:TextBox>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<div class="input-group">
-											<span class="input-group-addon">
-												<i class="fa fa-search"></i>
-											</span>
-											<asp:TextBox ID="txtMenuName" CssClass="form-control" runat="server"  PlaceHolder="Enter Menu Name"></asp:TextBox>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<div class="input-group">
-											<span class="input-group-addon">
-												<i class="fa fa-search"></i>
-											</span>
-											<asp:TextBox ID="txtMenuDisplayName" CssClass="form-control" runat="server"  PlaceHolder="Enter Menu Display Name"></asp:TextBox>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-4">
-									<div class="form-group">
-										<div class="input-group">
-											<span class="input-group-addon">
-												<i class="fa fa-search"></i>
-											</span>
-											<asp:TextBox ID="txtFormName" CssClass="form-control" runat="server"  PlaceHolder="Enter Form Name"></asp:TextBox>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<div class="input-group">
-											<span class="input-group-addon">
-												<i class="fa fa-search"></i>
-											</span>
-											<asp:TextBox ID="txtSequence" CssClass="form-control" runat="server"  PlaceHolder="Enter Sequence"></asp:TextBox>
-										</div>
-									</div>
-								</div>
-							</div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-search"></i>
+                                            </span>
+                                            <asp:TextBox ID="txtStudentName" CssClass="First form-control" runat="server" PlaceHolder="Enter Student Name"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-search"></i>
+                                            </span>
+                                            <asp:TextBox ID="txtEnrollmentNo" CssClass="First form-control" runat="server" PlaceHolder="Enter EnrollmentNo"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-search"></i>
+                                            </span>
+                                            <asp:DropDownList ID="ddlCurrentSem" CssClass="form-control select2me" runat="server"></asp:DropDownList>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-search"></i>
+                                            </span>
+                                            <asp:TextBox ID="txtEmailInstitue" CssClass="First form-control" runat="server" PlaceHolder="Enter Institute Email"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-search"></i>
+                                            </span>
+                                            <asp:TextBox ID="txtEmailPersonal" CssClass="First form-control" runat="server" PlaceHolder="Enter Persnol Email"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-search"></i>
+                                            </span>
+                                            <asp:DropDownList ID="ddlGender" CssClass="form-control select2me" runat="server"></asp:DropDownList>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-search"></i>
+                                            </span>
+                                            <asp:TextBox ID="txtRollNo" CssClass="First form-control" runat="server" PlaceHolder="Enter RollNo"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-search"></i>
+                                            </span>
+                                            <asp:TextBox ID="txtContactNo" CssClass="First form-control" runat="server" PlaceHolder="Enter ContactNo"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-actions">
                             <div class="row">
@@ -113,6 +145,7 @@
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
+
     <%-- End Search --%>
 
     <%-- List --%>
@@ -137,8 +170,8 @@
                                 </label>
                             </div>
                             <div class="tools">
-                                 <div>
-									<asp:HyperLink SkinID="hlAddNew" ID="hlAddNew" NavigateUrl="~/AdminPanel/Security/SEC_Menu/SEC_MenuAddEdit.aspx" runat="server"></asp:HyperLink>
+                                <div>
+                                    <asp:HyperLink SkinID="hlAddNew" ID="hlAddNew" NavigateUrl="~/AdminPanel/Student/StudentDetails/Stu_StudentAddEdit.aspx" runat="server"></asp:HyperLink>
                                     <div class="btn-group" runat="server" id="Div_ExportOption" visible="false">
                                         <button class="btn dropdown-toggle" data-toggle="dropdown">
                                             Export <i class="fa fa-angle-down"></i>
@@ -163,19 +196,39 @@
                                             <%-- Table Header --%>
                                             <thead>
                                                 <tr class="TRDark">
-                                                    <th><asp:Label ID="lbhParentMenuID" runat="server" Text="Parent Menu"></asp:Label>
+                                                    <th>
+                                                        <asp:Label ID="lbhStudentName" runat="server" Text="Student Name"></asp:Label>
                                                     </th>
-                                                    <th><asp:Label ID="lbhMenuName" runat="server" Text="Menu Name"></asp:Label>
+                                                    <th>
+                                                        <asp:Label ID="lbhEnrollmentNo" runat="server" Text="Enrollment No"></asp:Label>
                                                     </th>
-                                                    <th><asp:Label ID="lbhMenuDisplayName" runat="server" Text="Menu Display Name"></asp:Label>
+                                                    <th>
+                                                        <asp:Label ID="lbhRollNo" runat="server" Text="Roll No"></asp:Label>
                                                     </th>
-                                                    <th><asp:Label ID="lbhFormName" runat="server" Text="Form Name"></asp:Label>
+                                                    <th>
+                                                        <asp:Label ID="lbhCurrentSem" runat="server" Text="Current Sem"></asp:Label>
                                                     </th>
-                                                    <th><asp:Label ID="lbhSequence" runat="server" Text="Sequence"></asp:Label>
+                                                    <th>
+                                                        <asp:Label ID="lbhEmailInstitute" runat="server" Text="EmailInstitute"></asp:Label>
                                                     </th>
-													<th class="nosortsearch text-nowrap text-center">
-														<asp:Label ID="lbhAction" runat="server" Text="Action"></asp:Label>
-													</th>
+                                                    <th>
+                                                        <asp:Label ID="lbhEmailPersonal" runat="server" Text="EmailPersonal"></asp:Label>
+                                                    </th>
+                                                    <th>
+                                                        <asp:Label ID="lbhBirthDate" runat="server" Text="BirthDate"></asp:Label>
+                                                    </th>
+                                                    <th>
+                                                        <asp:Label ID="lbhContactNo" runat="server" Text="ContactNo"></asp:Label>
+                                                    </th>
+                                                    <th>
+                                                        <asp:Label ID="lbhGender" runat="server" Text="Gender"></asp:Label>
+                                                    </th>
+                                                    <th>
+                                                        <asp:Label ID="lbhUser" runat="server" Text="UserName"></asp:Label>
+                                                    </th>
+                                                    <th class="nosortsearch text-nowrap text-center">
+                                                        <asp:Label ID="lbhAction" runat="server" Text="Action"></asp:Label>
+                                                    </th>
                                                 </tr>
                                             </thead>
                                             <%-- END Table Header --%>
@@ -186,28 +239,44 @@
                                                         <%-- Table Rows --%>
                                                         <tr class="odd gradeX">
                                                             <td>
-                                                            <asp:HyperLink ID="hlViewMenuID" NavigateUrl='<%# "~/AdminPanel/Security/SEC_Menu/SEC_MenuView.aspx?MenuID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("MenuID").ToString()) %>' data-target="#viewiFrameReg" CssClass="modalButton" data-toggle="modal" runat="server"><%#Eval("ParentMenuID") %></asp:HyperLink>
+                                                                <asp:HyperLink ID="hlStudentID" NavigateUrl='<%# "~/AdminPanel/Student/StudentDetails/Stu_StudentView.aspx?StudentID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("StudentID").ToString()) %>' data-target="#viewiFrameReg" CssClass="modalButton" data-toggle="modal" runat="server"><%#Eval("StudentName") %></asp:HyperLink>
                                                             </td>
                                                             <td>
-                                                            	<%#Eval("MenuName") %>
+                                                                <%#Eval("EnrollmentNo") %>
                                                             </td>
                                                             <td>
-                                                            	<%#Eval("MenuDisplayName") %>
+                                                                <%#Eval("RollNo") %>
                                                             </td>
                                                             <td>
-                                                            	<%#Eval("FormName") %>
+                                                                <%#Eval("CurrentSem") %>
                                                             </td>
                                                             <td>
-                                                            	<%#Eval("Sequence") %>
+                                                                <%#Eval("EmailInstitute") %>
                                                             </td>
+                                                            <td>
+                                                                <%#Eval("EmailPersonal") %>
+                                                            </td>
+                                                             <td>
+                                                                <%#Eval("BirthDate",GNForm3C.CV.DefaultDateFormatForGrid) %>
+                                                            </td>
+                                                             <td>
+                                                                <%#Eval("ContactNo") %>
+                                                            </td>
+                                                            <td>
+                                                                <%#Eval("Gender") %>
+                                                            </td>
+                                                            <td>
+                                                                <%#Eval("UserName") %>
+                                                            </td>
+
                                                             <td class="text-nowrap text-center">
-                                                                <asp:HyperLink ID="hlView" SkinID="View" NavigateUrl='<%# "~/AdminPanel/Security/SEC_Menu/SEC_MenuView.aspx?MenuID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("MenuID").ToString()) %>' data-target="#viewiFrameReg" data-toggle="modal" runat="server"></asp:HyperLink>
-								<asp:HyperLink ID="hlEdit" SkinID="Edit" NavigateUrl='<%# "~/AdminPanel/Security/SEC_Menu/SEC_MenuAddEdit.aspx?MenuID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("MenuID").ToString()) %>' runat="server"></asp:HyperLink>
+                                                                <asp:HyperLink ID="hlView" SkinID="View" NavigateUrl='<%# "~/AdminPanel/Student/StudentDetails/Stu_StudentView.aspx?StudentID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("StudentID").ToString()) %>' data-target="#viewiFrameReg" data-toggle="modal" runat="server"></asp:HyperLink>
+                                                                <asp:HyperLink ID="hlEdit" SkinID="Edit" NavigateUrl='<%# "~/AdminPanel/Student/StudentDetails/Stu_StudentAddEdit.aspx?StudentID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("StudentID").ToString()) %>' runat="server"></asp:HyperLink>
                                                                 <asp:LinkButton ID="lbtnDelete" runat="server"
                                                                     SkinID="Delete"
                                                                     OnClientClick="javascript:return confirm('Are you sure you want to delete record ? ');"
                                                                     CommandName="DeleteRecord"
-                                                                    CommandArgument='<%#Eval("MenuID") %>'>
+                                                                    CommandArgument='<%#Eval("StudentID") %>'>
                                                                 </asp:LinkButton>
                                                             </td>
                                                         </tr>
@@ -217,7 +286,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    
+
                                     <%-- Pagination --%>
                                     <div class="row">
                                         <div class="col-md-4">
@@ -247,7 +316,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3 pull-right">
-                                            <div class="btn-group" runat="server" id="Div_GoToPageNo">                                                
+                                            <div class="btn-group" runat="server" id="Div_GoToPageNo">
                                                 <asp:TextBox ID="txtPageNo" placeholder="Page No" onkeypress="return IsNumeric(event)" runat="server" CssClass="pagination-panel-input form-control input-xsmall input-inline col-md-4" MaxLength="9"></asp:TextBox>
                                                 <asp:LinkButton ID="lbtnGoToPageNo" runat="server" CssClass="btn btn-default input-inline col-md-4" CommandName="GoPageNo" CommandArgument="0" OnClick="PageChange_Click">Go</asp:LinkButton>
                                             </div>
@@ -273,7 +342,7 @@
             <asp:AsyncPostBackTrigger ControlID="btnSearch" EventName="Click" />
             <asp:AsyncPostBackTrigger ControlID="btnClear" EventName="Click" />
             <asp:PostBackTrigger ControlID="lbtnExportExcel" />
-	    <asp:PostBackTrigger ControlID="lbtnExportPDF" />
+            <asp:PostBackTrigger ControlID="lbtnExportPDF" />
         </Triggers>
     </asp:UpdatePanel>
     <%-- END List --%>
@@ -288,7 +357,6 @@
         </ProgressTemplate>
     </asp:UpdateProgress>
     <%-- END Loading  --%>
-
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="cphScripts" runat="Server">
     <script>
@@ -300,3 +368,4 @@
         SearchGridUI('<%=btnSearch.ClientID%>', 'sample_1', 1);
     </script>
 </asp:Content>
+
