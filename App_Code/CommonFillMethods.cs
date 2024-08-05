@@ -88,6 +88,15 @@ namespace GNForm3C
             ddl.DataBind();
             ddl.Items.Insert(0, new ListItem("Select Fin Year", "-99"));
         }
+        public static void FillDropDownListIncomeTypeIDByHospitalID(DropDownList ddl, SqlInt32 HospitalID)
+        {
+           MST_IncomeTypeBAL mST_IncomeTypeBAL = new MST_IncomeTypeBAL();
+            ddl.DataSource = mST_IncomeTypeBAL.SelectComboBoxByIncomeTypeID(HospitalID);
+            ddl.DataValueField = "IncomeTypeID";
+            ddl.DataTextField = "IncomeType";
+            ddl.DataBind();
+            ddl.Items.Insert(0, new ListItem("Select Fin Year", "-99"));
+        }
         public static void FillDropDownListFinYearID(DropDownList ddl)
         {
             MST_FinYearBAL balMST_FinYear = new MST_FinYearBAL();

@@ -1,11 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default/MasterPageView.master" AutoEventWireup="true" CodeFile="Stu_StudentView.aspx.cs" Inherits="AdminPanel_Student_StudentDetails_Stu_StudentView" %>
 
-<asp:Content ID="cnthead" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="cnthead" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="cntPageContent" ContentPlaceHolderID="cphPageContent" Runat="Server">
-	<!-- BEGIN SAMPLE FORM PORTLET-->
+<asp:Content ID="cntPageContent" ContentPlaceHolderID="cphPageContent" runat="Server">
+    <!-- BEGIN SAMPLE FORM PORTLET-->
 
-       <div class="portlet light">
+    <div class="portlet light">
         <div class="portlet-title">
             <div class="caption">
                 <asp:Label SkinID="lblViewFormHeaderIcon" ID="lblViewFormHeaderIcon" runat="server"></asp:Label>
@@ -118,21 +118,21 @@
             </div>
         </div>
     </div>
-	<!-- BEGIN SAMPLE FORM PORTLET-->
+    <!-- BEGIN SAMPLE FORM PORTLET-->
 
-<!-- END SAMPLE FORM PORTLET-->
+    <!-- END SAMPLE FORM PORTLET-->
 
-<!-- END SAMPLE FORM PORTLET-->
+
 </asp:Content>
-<asp:Content ID="cntScripts" ContentPlaceHolderID="cphScripts" Runat="Server">
-<script>
-    $(document).keyup(function (e) {
-        if (e.keyCode == 27) {
-            ;
-            $("#CloseButton").trigger("click");
-        }
-    });
-</script>
+<asp:Content ID="cntScripts" ContentPlaceHolderID="cphScripts" runat="Server">
+    <script>
+        $(document).keyup(function (e) {
+            if (e.keyCode == 27) {
+                ;
+                $("#CloseButton").trigger("click");
+            }
+        });
+    </script>
 </asp:Content>
 
 

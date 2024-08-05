@@ -134,10 +134,14 @@ namespace GNForm3C.BAL
             MST_IncomeTypeDAL dalMST_IncomeType = new MST_IncomeTypeDAL();
             return dalMST_IncomeType.SelectComboBox();
         }
+        public DataTable SelectComboBoxByIncomeTypeID(SqlInt32 HospitalID)
+        {
+			MST_IncomeTypeDAL mST_IncomeTypeDAL = new MST_IncomeTypeDAL();
+            return mST_IncomeTypeDAL.SelectComboBoxByIncomeTypeID(HospitalID);
+        }
 
+        #endregion ComboBox
 
-		#endregion ComboBox
-
-	}
+    }
 
 }

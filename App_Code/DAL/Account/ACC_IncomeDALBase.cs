@@ -412,16 +412,16 @@ namespace GNForm3C.DAL
         }
 
 
-        /*public DataTable SelectShow(SqlInt32 HospitalID)
+        public DataTable SelectShowByHospital(SqlInt32 HospitalID)
         {
 
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("[PR_ACC_IncomeType_SelectShow]");
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_ACC_IncomeType_SelectShowByHospital");
                 sqlDB.AddInParameter(dbCMD, "@HospitalID", SqlDbType.Int, HospitalID);
 
-                DataTable dtACC_IncomeShow = new DataTable("[PR_ACC_IncomeType_SelectShow]");
+                DataTable dtACC_IncomeShow = new DataTable("PR_ACC_IncomeType_SelectShowByHospital");
 
                 DataBaseHelper DBH = new DataBaseHelper();
                 DBH.LoadDataTable(sqlDB, dbCMD, dtACC_IncomeShow);
@@ -442,7 +442,7 @@ namespace GNForm3C.DAL
                     throw;
                 return null;
             }
-        }*/
+        }
 
         public DataTable SelectShow(SqlInt32 FinYearID, SqlInt32 HospitalID, SqlInt32 IncomeTypeID)
         {
@@ -511,7 +511,7 @@ namespace GNForm3C.DAL
                 return null;
             }
         }
-
+     
         #endregion ComboBox
 
         #region AutoComplete

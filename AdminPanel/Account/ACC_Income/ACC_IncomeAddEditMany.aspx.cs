@@ -1,14 +1,18 @@
-﻿using GNForm3C.BAL;
-using GNForm3C.ENT;
-using GNForm3C;
+﻿
 using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
 using System.Data;
-using System.Linq;
+using System.Configuration;
+using System.Collections;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
+using GNForm3C.BAL;
+using GNForm3C.ENT;
+using GNForm3C;
+using System.Data.SqlTypes;
+using System.Collections.Generic;
 
 public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : System.Web.UI.Page
 {
@@ -30,10 +34,11 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
 
         if (!Page.IsPostBack)
         {
-            if (Request.QueryString["FinYearID"] != null && Request.QueryString["HospitalID"] != null && Request.QueryString["IncomeTypeID"] != null )
+            if (Request.QueryString["HospitalID"] != null)
             {
                 btnShow_Click(sender, e);
             }
+
             #region 11.2 Fill Labels
 
             FillLabels(FormName);
@@ -42,19 +47,20 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
 
             #region 11.3 DropDown List Fill Section
 
-            FillDropDownList();
+            CommonFillMethods.FillDropDownListHospitalID(ddlHospitalID);
 
             #endregion 11.3 DropDown List Fill Section
 
             #region 11.4 Set Control Default Value
 
-            lblFormHeader.Text = CV.PageHeaderMany + " Income ";
+            lblFormHeader.Text = CV.PageHeaderMany + " Income";
             upr.DisplayAfter = CV.UpdateProgressDisplayAfter;
 
 
             #endregion 11.4 Set Control Default Value
         }
     }
+
     #endregion Pageload
 
     #region 12.0 FillLabels
@@ -65,54 +71,10 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
     #endregion 12.0 FillLabels
 
     #region 13.0 Fill DropDownList
-
     private void FillDropDownList()
     {
-        CommonFillMethods.FillDropDownListFinYearID(ddlFinYearID);
         CommonFillMethods.FillDropDownListHospitalID(ddlHospitalID);
-       // FillIncomeTypeDropDown();
-        
-        CommonFillMethods.FillSingleDropDownListIncomeTypeID(ddlIncomeTypeID);
-        
-        //if (ddlFinYearID.SelectedValue != null && ddlHospitalID.SelectedValue != null)
-        //{
-        //    int finYearID = Convert.ToInt32(ddlFinYearID.SelectedValue);
-        //    int hospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
-
-        //    // Fill the IncomeType dropdown based on the selected FinYearID and HospitalID
-        //    CommonFillMethods.FillDropDownListIncomeTypeIDByFinYearID(ddlIncomeTypeID, finYearID, hospitalID);
-        //}
-        //CommonFillMethods.FillDropDownListIncomeTypeIDByFinYearID(ddlIncomeTypeID,ddlFinYearID,ddlHospitalID);
-
     }
-/*    protected void ddlFinYearID_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        FillIncomeTypeDropDown();
-    }
-
-    protected void ddlHospitalID_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        FillIncomeTypeDropDown();
-    }
-*/
-/*    private void FillIncomeTypeDropDown()
-    {
-        int finYearID = Convert.ToInt32(ddlFinYearID.SelectedValue);
-        int hospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
-
-        if (finYearID != -99 && hospitalID != -99)
-        {
-            CommonFillMethods.FillDropDownListIncomeTypeIDByFinYearID(ddlIncomeTypeID, finYearID, hospitalID);
-            
-        }
-        else
-        {
-            // Clear the IncomeType dropdown if the selected FinYearID or HospitalID is invalid
-            ddlIncomeTypeID.Items.Clear();
-            ddlIncomeTypeID.Items.Insert(0, new ListItem("Select Income Type", "-99"));
-            
-        }
-    }*/
 
     #endregion 13.0 Fill DropDownList
 
@@ -120,46 +82,33 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
     protected void btnShow_Click(object sender, EventArgs e)
     {
         SqlInt32 HospitalID = SqlInt32.Null;
-        SqlInt32 FinYearID = SqlInt32.Null;
-        SqlInt32 IncomeTypeID = SqlInt32.Null;
 
         #region NavigateLogic
-        if (Request.QueryString["HospitalID"] != null && Request.QueryString["FinYearID"] != null && Request.QueryString["IncomeTypeID"] != null)
+        if (Request.QueryString["HospitalID"] != null)
         {
             if (!Page.IsPostBack)
             {
                 HospitalID = CommonFunctions.DecryptBase64Int32(Request.QueryString["HospitalID"]);
-                FinYearID = CommonFunctions.DecryptBase64Int32(Request.QueryString["FinYearID"]);
-                IncomeTypeID = CommonFunctions.DecryptBase64Int32(Request.QueryString["IncomeTypeID"]);
-
             }
             else
             {
                 if (ddlHospitalID.SelectedIndex > 0)
                     HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
-                    FinYearID = Convert.ToInt32(ddlFinYearID.SelectedValue);
-                    IncomeTypeID = Convert.ToInt32(ddlIncomeTypeID.SelectedValue);
             }
         }
         else
         {
-            if  (ddlHospitalID.SelectedIndex > 0)
+            if (ddlHospitalID.SelectedIndex > 0)
                 HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
-                FinYearID = Convert.ToInt32(ddlFinYearID.SelectedValue);
-                IncomeTypeID = Convert.ToInt32(ddlIncomeTypeID.SelectedValue);
         }
         #endregion NavigateLogic
 
-        ACC_IncomeBAL balACC_IncomeBAL = new ACC_IncomeBAL();
+        ACC_IncomeBAL balACC_Income = new ACC_IncomeBAL();
 
-        DataTable dt = balACC_IncomeBAL.SelectShow(FinYearID, HospitalID, IncomeTypeID);
+        DataTable dt = balACC_Income.SelectShowByHospital(HospitalID);
 
         if (Request.QueryString["HospitalID"] != null)
             ddlHospitalID.SelectedValue = CommonFunctions.DecryptBase64(Request.QueryString["HospitalID"]);
-        if (Request.QueryString["FinYearID"] != null)
-            ddlFinYearID.SelectedValue = CommonFunctions.DecryptBase64(Request.QueryString["FinYearID"]);
-        if (Request.QueryString["IncomeTypeID"] != null)
-            ddlIncomeTypeID.SelectedValue = CommonFunctions.DecryptBase64(Request.QueryString["IncomeTypeID"]);
 
         foreach (DataColumn dtc in dt.Columns)
         {
@@ -186,20 +135,14 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
     protected void btnSave_Click(object sender, EventArgs e)
     {
         Page.Validate();
+
         if (Page.IsValid)
         {
             SqlInt32 HospitalID = SqlInt32.Null;
-            SqlInt32 FinYearID = SqlInt32.Null;
-            SqlInt32 IncomeTypeID = SqlInt32.Null;
-
             if (ddlHospitalID.SelectedIndex > 0)
                 HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
-            if (ddlHospitalID.SelectedIndex > 0)
-                FinYearID = Convert.ToInt32(ddlFinYearID.SelectedValue);
-            if (ddlHospitalID.SelectedIndex > 0)
-                IncomeTypeID = Convert.ToInt32(ddlIncomeTypeID.SelectedValue);
 
-            ACC_IncomeBAL balACC_IncomeBAL = new ACC_IncomeBAL();
+            ACC_IncomeBAL balACC_Income = new ACC_IncomeBAL();
             ACC_IncomeENT entACC_Income = new ACC_IncomeENT();
 
             foreach (RepeaterItem items in rpData.Items)
@@ -208,8 +151,12 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
                 {
                     #region FindControl
 
+                    DropDownList ddlFinYearID = (DropDownList)items.FindControl("ddlFinYearID");
+                    DropDownList ddlIncomeTypeID = (DropDownList)items.FindControl("ddlIncomeTypeID");
+
+                    var dtpIncomeDate = (TextBox)items.FindControl("txtIncomeDate");
+
                     TextBox txtAmount = (TextBox)items.FindControl("txtAmount");
-                    TextBox txtIncomeDate = (TextBox)items.FindControl("txtIncomeDate");
                     HiddenField Hdfiled = (HiddenField)items.FindControl("hdIncomeID");
                     TextBox txtNote = (TextBox)items.FindControl("txtNote");
                     CheckBox chkIsSelected = (CheckBox)items.FindControl("chkIsSelected");
@@ -218,12 +165,13 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
                     #endregion FindControl
 
                     #region 15.1.1 Gather Data
+
+                    entACC_Income.HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
                     entACC_Income.FinYearID = Convert.ToInt32(ddlFinYearID.SelectedValue);
                     entACC_Income.IncomeTypeID = Convert.ToInt32(ddlIncomeTypeID.SelectedValue);
-                    entACC_Income.HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
-                    entACC_Income.Amount = Convert.ToDecimal(txtAmount.Text.Trim());
-                    entACC_Income.IncomeDate = Convert.ToDateTime(txtIncomeDate.Text.Trim());
-                    entACC_Income.Note= txtNote.Text.Trim();
+                    entACC_Income.IncomeDate = Convert.ToDateTime(dtpIncomeDate.Text);
+                    entACC_Income.Amount = Convert.ToDecimal(txtAmount.Text);
+                    entACC_Income.Note = Convert.ToString(txtNote.Text);
                     entACC_Income.UserID = Convert.ToInt32(Session["UserID"]);
                     entACC_Income.Created = DateTime.Now;
                     entACC_Income.Modified = DateTime.Now;
@@ -235,16 +183,16 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
                         if (chkIsSelected.Checked)
                         {
                             #region 15.1.2 Update Data
-                            if (txtAmount.Text.Trim() == string.Empty)
+                            if (ddlIncomeTypeID.Text.Trim() == string.Empty)
                             {
-                                txtAmount.Focus();
-                                ucMessage.ShowError("Enter Amount");
+                                ddlIncomeTypeID.Focus();
+                                ucMessage.ShowError("Enter Income Type");
                                 break;
                             }
                             else
                             {
                                 entACC_Income.IncomeID = Convert.ToInt32(Hdfiled.Value);
-                                if (balACC_IncomeBAL.Update(entACC_Income))
+                                if (balACC_Income.Update(entACC_Income))
                                 {
                                     ucMessage.ShowSuccess(CommonMessage.RecordUpdated());
                                 }
@@ -255,16 +203,16 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
                         else
                         {
                             #region 15.1.3 Delete Data
-                            if (txtAmount.Text.Trim() == string.Empty)
+                            if (ddlIncomeTypeID.Text.Trim() == string.Empty)
                             {
-                                txtAmount.Focus();
-                                ucMessage.ShowError("Enter Amount");
+                                ddlIncomeTypeID.Focus();
+                                ucMessage.ShowError("Enter Income Type");
                                 break;
                             }
                             else
                             {
                                 entACC_Income.IncomeID = Convert.ToInt32(Hdfiled.Value);
-                                if (balACC_IncomeBAL.Delete(entACC_Income.IncomeID))
+                                if (balACC_Income.Delete(entACC_Income.IncomeID))
                                 {
                                     ucMessage.ShowSuccess(CommonMessage.DeletedRecord());
                                 }
@@ -278,16 +226,16 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
                         if (chkIsSelected.Checked)
                         {
                             #region 15.1.4 Insert Data
-                            if (txtAmount.Text.Trim() == string.Empty && txtIncomeDate.Text.Trim() != string.Empty && txtNote.Text.Trim() != string.Empty)
+                            if (ddlIncomeTypeID.Text.Trim() == string.Empty && txtAmount.Text.Trim() != string.Empty)
                             {
-                                txtAmount.Focus();
-                                ucMessage.ShowError("Enter Amount");
+                                ddlIncomeTypeID.Focus();
+                                ucMessage.ShowError("Enter Income Type");
                             }
                             else
                             {
-                                if (txtAmount.Text.Trim() != string.Empty)
+                                if (ddlIncomeTypeID.Text.Trim() != string.Empty)
                                 {
-                                    if (balACC_IncomeBAL.Insert(entACC_Income))
+                                    if (balACC_Income.Insert(entACC_Income))
                                     {
                                         Div_ShowResult.Visible = false;
                                         ucMessage.ShowSuccess(CommonMessage.RecordSaved());
@@ -314,8 +262,6 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
     private void ClearControls()
     {
         ddlHospitalID.SelectedIndex = 0;
-        ddlFinYearID.SelectedIndex = 0;
-        ddlIncomeTypeID.SelectedIndex = 0;
     }
 
     #endregion 16.0 Clear Controls
@@ -327,20 +273,26 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
         dt.Columns.Add("Amount");
         dt.Columns.Add("Note");
         dt.Columns.Add("IncomeDate");
+        dt.Columns.Add("FinYearID");
+        dt.Columns.Add("IncomeTypeID");
         dt.Columns.Add("IncomeID");
 
         foreach (RepeaterItem rp in rpData.Items)
         {
+            DropDownList finyearid = (DropDownList)rp.FindControl("ddlFinYearID");
+            DropDownList incometypeid = (DropDownList)rp.FindControl("ddlIncomeTypeID");
             TextBox txtAmount = (TextBox)rp.FindControl("txtAmount");
             TextBox txtNote = (TextBox)rp.FindControl("txtNote");
-           
-            TextBox txtIncomeDate = (TextBox)rp.FindControl("txtIncomeDate");
+
+            TextBox txtIncomeDate = (TextBox)rp.FindControl("dtpIncomeDate");
             HiddenField hdIncomeID = (HiddenField)rp.FindControl("hdIncomeID");
 
             DataRow dr = dt.NewRow();
             dr["Amount"] = txtAmount.Text.Trim();
             dr["Note"] = txtNote.Text.Trim();
             dr["IncomeDate"] = txtIncomeDate.Text.Trim();
+            dr["FinYearID"]=finyearid.SelectedValue;
+            dr["IncomeTypeID"]=incometypeid.SelectedValue;
             dr["IncomeId"] = hdIncomeID.Value.ToString();
 
             dt.Rows.Add(dr);
@@ -359,49 +311,91 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
     }
     #endregion 17.0 Add Row Button
 
-    #region 18.0 Fill Finyear Dropdown From Hopital
-    protected void ddlHospitalID_SelectedIndexChanged(object sender, EventArgs e)
+    protected void rpData_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
-
+        SqlInt32 HospitalID = SqlInt32.Null;
         if (ddlHospitalID.SelectedIndex > 0)
+            HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue); 
+        if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
         {
-            ddlIncomeTypeID.SelectedIndex = 0;
-            SqlInt32 HospitalID = SqlInt32.Null;
-            HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
-            CommonFillMethods.FillDropDownListFinYearIDByHospitalID(ddlFinYearID, HospitalID);
+            var ddlFinYearID = (DropDownList)e.Item.FindControl("ddlFinYearID");
+            var ddlIncomeTypeID = (DropDownList)e.Item.FindControl("ddlIncomeTypeID");
+            var txtAmount = (TextBox)e.Item.FindControl("txtAmount");
+            var hdIncomeID = (HiddenField)e.Item.FindControl("hdIncomeID");
+            var txtNote = (TextBox)e.Item.FindControl("txtNote");
+            var chkIsSelected = (CheckBox)e.Item.FindControl("chkIsSelected");
+            var dtpIncomeDate = (TextBox)e.Item.FindControl("dtpIncomeDate");
 
-        }
-        else
-        {
-            ddlFinYearID.Items.Clear();
-            ddlFinYearID.Items.Insert(0, new ListItem("Select Fin Year", "-99"));
-            ddlIncomeTypeID.Items.Clear();
-            ddlIncomeTypeID.Items.Insert(0, new ListItem("Select Income Type", "-99"));
+            if (ddlFinYearID != null)
+            {
+                CommonFillMethods.FillSingleDropDownListFinYearID(ddlFinYearID);
+               string finYearID = DataBinder.Eval(e.Item.DataItem, "FinYearID").ToString().Trim();
+                //int finYearID = DataBinder.Eval(e.Item.DataItem, "FinYearID");
 
+                // Logging for debugging
+                System.Diagnostics.Debug.WriteLine("FinYearID from DataBinder: " + finYearID);
+                foreach (ListItem item in ddlFinYearID.Items)
+                {
+                    System.Diagnostics.Debug.WriteLine("DropDownList item value: " + item.Value);
+                }
+
+                if (ddlFinYearID.Items.FindByValue(finYearID) != null)
+                {
+                    ddlFinYearID.SelectedValue = finYearID;
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("FinYearID not found in DropDownList: " + finYearID);
+                }
+            }
+
+            if (ddlIncomeTypeID != null)
+            {
+                CommonFillMethods.FillDropDownListIncomeTypeIDByHospitalID(ddlIncomeTypeID,HospitalID);
+                string incomeTypeID = DataBinder.Eval(e.Item.DataItem, "IncomeTypeID").ToString().Trim();
+
+                // Logging for debugging
+                System.Diagnostics.Debug.WriteLine("IncomeTypeID from DataBinder: " + incomeTypeID);
+                foreach (ListItem item in ddlIncomeTypeID.Items)
+                {
+                    System.Diagnostics.Debug.WriteLine("DropDownList item value: " + item.Value);
+                }
+
+                if (ddlIncomeTypeID.Items.FindByValue(incomeTypeID) != null)
+                {
+                    ddlIncomeTypeID.SelectedValue = incomeTypeID;
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("IncomeTypeID not found in DropDownList: " + incomeTypeID);
+                }
+            }
+
+            if (txtAmount != null)
+            {
+                txtAmount.Text = DataBinder.Eval(e.Item.DataItem, "Amount").ToString();
+            }
+
+            if (hdIncomeID != null)
+            {
+                hdIncomeID.Value = DataBinder.Eval(e.Item.DataItem, "IncomeID").ToString();
+            }
+
+            if (txtNote != null)
+            {
+                txtNote.Text = DataBinder.Eval(e.Item.DataItem, "Note").ToString();
+            }
+
+
+            if (dtpIncomeDate != null)
+            {
+                DateTime incomeDate;
+                if (DateTime.TryParse(DataBinder.Eval(e.Item.DataItem, "IncomeDate").ToString(), out incomeDate))
+                {
+                    dtpIncomeDate.Text = incomeDate.ToString("dd-MM-yyyy");
+                }
+            }
         }
     }
 
-    #endregion 18.0 Fill Finyear Dropdown From Hopital
-
-    #region 19.0 Fill IncomeType Dropdown From Finyear
-    protected void ddlFinYearID_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (ddlFinYearID.SelectedIndex > 0)
-        {
-            SqlInt32 FinYearID = SqlInt32.Null;
-            SqlInt32 HospitalID = SqlInt32.Null;
-
-            FinYearID = Convert.ToInt32(ddlFinYearID.SelectedValue);
-            HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
-            CommonFillMethods.FillDropDownListIncomeTypeIDByFinYearID(ddlIncomeTypeID, FinYearID, HospitalID);
-
-        }
-        else
-        {
-            ddlIncomeTypeID.Items.Clear();
-            ddlIncomeTypeID.Items.Insert(0, new ListItem("Select Income Type", "-99"));
-        }
-    }
-
-    #endregion 19.0 Fill IncomeType Dropdown From Finyear
 }

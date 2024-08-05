@@ -36,7 +36,7 @@
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="btnSave" EventName="Click" />
             <asp:AsyncPostBackTrigger ControlID="ddlHospitalID" />
-            <asp:AsyncPostBackTrigger ControlID="ddlFinYearID" />
+         
         </Triggers>
         <ContentTemplate>
             <asp:UpdatePanel ID="upACC_Income2" runat="server" EnableViewState="true" UpdateMode="Conditional" ChildrenAsTriggers="false">
@@ -100,13 +100,13 @@
                                             <asp:Label ID="lblHospitalID_XXXXX" runat="server" Text="Hospital"></asp:Label>
                                         </label>
                                         <div class="col-md-5">
-                                            <asp:DropDownList ID="ddlHospitalID" CssClass="form-control select2me" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlHospitalID_SelectedIndexChanged"></asp:DropDownList>
+                                            <asp:DropDownList ID="ddlHospitalID" CssClass="form-control select2me" runat="server" AutoPostBack="True"></asp:DropDownList>
                                             <asp:RequiredFieldValidator ID="rfvHospitalID" SetFocusOnError="True" runat="server" Display="Dynamic" ControlToValidate="ddlHospitalID" ErrorMessage="Select Hospital" InitialValue="-99"></asp:RequiredFieldValidator>
                                         </div>
                                     </div>
 
 
-                                    <div class="form-group">
+                                    <%--                                    <div class="form-group">
                                         <label class="col-md-3 control-label">
                                             <span class="required">*</span>
                                             <asp:Label ID="lblFinYearID_XXXXX" runat="server" Text="FinYear"></asp:Label>
@@ -126,7 +126,7 @@
                                             <asp:DropDownList ID="ddlIncomeTypeID" CssClass="form-control select2me" runat="server" AutoPostBack="True"></asp:DropDownList>
                                             <asp:RequiredFieldValidator ID="rfvIncomeTypeID" SetFocusOnError="True" runat="server" Display="Dynamic" ControlToValidate="ddlIncomeTypeID" ErrorMessage="Select Income Type" InitialValue="-99"></asp:RequiredFieldValidator>
                                         </div>
-                                    </div>
+                                    </div>--%>
 
 
 
@@ -209,6 +209,8 @@
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="btnShow" EventName="Click" />
                     <asp:AsyncPostBackTrigger ControlID="btnAdd" EventName="Click" />
+                    <asp:AsyncPostBackTrigger ControlID="ddlHospitalID" />
+          
                 </Triggers>
                 <ContentTemplate>
                     <div class="row">
@@ -244,6 +246,13 @@
                                                                 <asp:Label ID="lbhSerialNo" runat="server" Text="Sr."></asp:Label>
                                                             </th>
                                                             <th>
+                                                                <asp:Label ID="lbhFinYear" runat="server" Text="FinYear"></asp:Label>
+                                                            </th>
+
+                                                            <th>
+                                                                <asp:Label ID="lbhIncomeType" runat="server" Text="Income Type"></asp:Label>
+                                                            </th>
+                                                            <th>
                                                                 <asp:Label ID="lbhAmount" runat="server" Text="Amount"></asp:Label>
                                                             </th>
                                                             <th>
@@ -252,13 +261,15 @@
                                                             <th>
                                                                 <asp:Label ID="lbhNote" runat="server" Text="Note"></asp:Label>
                                                             </th>
-
+                                                            <%--                                                            <th>
+                                                                <asp:Label ID="User" runat="server" Text="user"></asp:Label>
+                                                            </th>--%>
                                                         </tr>
                                                     </thead>
                                                     <%-- END Table Header --%>
 
                                                     <tbody>
-                                                        <asp:Repeater ID="rpData" runat="server">
+                                                        <asp:Repeater ID="rpData" runat="server" OnItemDataBound="rpData_ItemDataBound">
                                                             <ItemTemplate>
                                                                 <%-- Table Rows --%>
                                                                 <tr class="odd gradeX">
@@ -268,6 +279,15 @@
                                                                     <td class="text-center">
                                                                         <%#Container.ItemIndex+1 %>
                                                                     </td>
+
+                                                                    <td>
+                                                                        <asp:DropDownList ID="ddlFinYearID" CssClass="form-control select2me" runat="server"></asp:DropDownList>
+                                                                    </td>
+
+
+                                                                    <td>
+                                                                        <asp:DropDownList ID="ddlIncomeTypeID" CssClass="form-control select2me" runat="server"></asp:DropDownList>
+                                                                    </td>
                                                                     <td>
                                                                         <asp:TextBox ID="txtAmount" CssClass="form-control" runat="server" Text='<%#Eval("Amount") %>' PlaceHolder="Enter Amount "></asp:TextBox>
                                                                         <%--<asp:RequiredFieldValidator  ID="rfvAmount" SetFocusOnError="True" Display="Dynamic" runat="server" ControlToValidate="txtAmount" ErrorMessage="Enter Amount"></asp:RequiredFieldValidator>--%>
@@ -275,7 +295,7 @@
                                                                     </td>
                                                                     <td>
                                                                         <%--<asp:TextBox ID="txtIncomeDate" CssClass="form-control" class="calendar" runat="server" Text='<%#Eval("IncomeDate") %>' PlaceHolder="Enter IncomeDate " TextMode="Date"></asp:TextBox>--%>
-                                                                        <asp:TextBox ID="txtIncomeDate" CssClass="form-control" runat="server"
+                                                                        <asp:TextBox ID="dtpIncomeDate" CssClass="form-control" runat="server"
                                                                             Text='<%# Bind("IncomeDate", "{0:yyyy-MM-dd}") %>'
                                                                             PlaceHolder="Enter Income Date" type="date"></asp:TextBox>
                                                                         <%--                                                                  <asp:TextBox ID="txtIncomeDate" CssClass="form-control" runat="server" Text='<%#Eval("IncomeDate") %>' PlaceHolder="Enter IncomeDate "></asp:TextBox>--%>
@@ -285,7 +305,9 @@
                                                                         <asp:TextBox ID="txtNote" CssClass="form-control" runat="server" Text='<%#Eval("Note") %>' PlaceHolder="Enter Note "></asp:TextBox>
                                                                         <%--<asp:RequiredFieldValidator  ID="rfvNote" SetFocusOnError="True" Display="Dynamic" runat="server" ControlToValidate="txtNote" ErrorMessage="Enter Amount"></asp:RequiredFieldValidator>--%>
                                                                     </td>
-
+                                                                    <%--                                                                    <td>
+                                                                        <asp:DropDownList ID="ddlUserID" CssClass="form-control select2me" runat="server" Text='<%#Eval("UserID") %>' PlaceHolder="Enter User "AutoPostBack="True"></asp:DropDownList>
+                                                                    </td>--%>
                                                                 </tr>
                                                                 <%-- END Table Rows --%>
                                                             </ItemTemplate>

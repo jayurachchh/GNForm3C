@@ -117,7 +117,58 @@ public partial class AdminPanel_ACC_Expense_ACC_ExpenseList : System.Web.UI.Page
 
         #region Gather Data
 
-        if (ddlExpenseTypeID.SelectedIndex > 0)
+
+        if (Request.QueryString["HospitalID"] != null)
+        {
+            if (!Page.IsPostBack)
+            {
+                HospitalID = CommonFunctions.DecryptBase64Int32(Request.QueryString["HospitalID"]);
+            }
+            else
+            {
+                if (ddlExpenseTypeID.SelectedIndex > 0)
+                    ExpenseTypeID = Convert.ToInt32(ddlExpenseTypeID.SelectedValue);
+
+                if (txtAmount.Text.Trim() != String.Empty)
+                    Amount = Convert.ToDecimal(txtAmount.Text.Trim());
+
+                if (txtTagName.Text.Trim() != String.Empty)
+                    TagName = txtTagName.Text.Trim();
+
+                if (dtpExpenseDate.Text.Trim() != String.Empty)
+                    ExpenseDate = Convert.ToDateTime(dtpExpenseDate.Text.Trim());
+
+                if (ddlHospitalID.SelectedIndex > 0)
+                    HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
+
+                if (ddlFinYearID.SelectedIndex > 0)
+                    FinYearID = Convert.ToInt32(ddlFinYearID.SelectedValue);
+            }
+        }
+        else
+        {
+
+            if (ddlExpenseTypeID.SelectedIndex > 0)
+                ExpenseTypeID = Convert.ToInt32(ddlExpenseTypeID.SelectedValue);
+
+            if (txtAmount.Text.Trim() != String.Empty)
+                Amount = Convert.ToDecimal(txtAmount.Text.Trim());
+
+            if (txtTagName.Text.Trim() != String.Empty)
+                TagName = txtTagName.Text.Trim();
+
+            if (dtpExpenseDate.Text.Trim() != String.Empty)
+                ExpenseDate = Convert.ToDateTime(dtpExpenseDate.Text.Trim());
+
+            if (ddlHospitalID.SelectedIndex > 0)
+                HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
+
+            if (ddlFinYearID.SelectedIndex > 0)
+                FinYearID = Convert.ToInt32(ddlFinYearID.SelectedValue);
+        }
+
+
+/*        if (ddlExpenseTypeID.SelectedIndex > 0)
             ExpenseTypeID = Convert.ToInt32(ddlExpenseTypeID.SelectedValue);
 
         if (txtAmount.Text.Trim() != String.Empty)
@@ -133,7 +184,7 @@ public partial class AdminPanel_ACC_Expense_ACC_ExpenseList : System.Web.UI.Page
             HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
 
         if (ddlFinYearID.SelectedIndex > 0)
-            FinYearID = Convert.ToInt32(ddlFinYearID.SelectedValue);
+            FinYearID = Convert.ToInt32(ddlFinYearID.SelectedValue);*/
 
 
         #endregion Gather Data
@@ -156,7 +207,11 @@ public partial class AdminPanel_ACC_Expense_ACC_ExpenseList : System.Web.UI.Page
             Div_ExportOption.Visible = true;
             rpData.DataSource = dt;
             rpData.DataBind();
-
+            if (Request.QueryString["HospitalID"] != null)
+            {
+                HospitalID = CommonFunctions.DecryptBase64Int32(Request.QueryString["HospitalID"]);
+                ddlHospitalID.SelectedIndex = Convert.ToInt32(HospitalID.ToString());
+            }
             if (PageNo > TotalPages)
                 PageNo = TotalPages;
 

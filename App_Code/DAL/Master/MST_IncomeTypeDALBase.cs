@@ -374,13 +374,45 @@ namespace GNForm3C.DAL
 				return null;
 			}
 		}
+        public DataTable SelectComboBoxByIncomeTypeID(SqlInt32 HospitalID)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_ACC_IncomeType_IncomeTypeIDByHospitalID");
 
-		#endregion ComboBox
-
-		#region AutoComplete
+                sqlDB.AddInParameter(dbCMD, "@HospitalID", SqlDbType.Int, HospitalID);
 
 
-		#endregion AutoComplete
+                DataTable dtMST_IncomeType = new DataTable("PR_ACC_IncomeType_IncomeTypeIDByHospitalID");
 
-	}
+                DataBaseHelper DBH = new DataBaseHelper();
+                DBH.LoadDataTable(sqlDB, dbCMD, dtMST_IncomeType);
+
+                return dtMST_IncomeType;
+            }
+            catch (SqlException sqlex)
+            {
+                Message = SQLDataExceptionMessage(sqlex);
+                if (SQLDataExceptionHandler(sqlex))
+                    throw;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Message = ExceptionMessage(ex);
+                if (ExceptionHandler(ex))
+                    throw;
+                return null;
+            }
+        }
+
+        #endregion ComboBox
+
+        #region AutoComplete
+
+
+        #endregion AutoComplete
+
+    }
 }

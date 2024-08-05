@@ -85,6 +85,7 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEdit : System.We
 		CommonFillMethods.FillSingleDropDownListIncomeTypeID(ddlIncomeTypeID);
 		CommonFillMethods.FillDropDownListHospitalID(ddlHospitalID);
 		CommonFillMethods.FillSingleDropDownListFinYearID(ddlFinYearID);
+		
 	}
 	
 	#endregion 13.0 Fill DropDownList

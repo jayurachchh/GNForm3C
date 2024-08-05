@@ -431,6 +431,11 @@
                                             <span class="title">Student Details</span>
                                         </a>
                                     </li>
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Student/StudentDetails/BranchIntakeAddEdit.aspx") %>' class="nav-link ">
+                                            <span class="title">BranchIntake </span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
 

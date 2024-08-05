@@ -145,11 +145,11 @@ namespace GNForm3C.BAL
             ACC_IncomeDAL dalACC_Income = new ACC_IncomeDAL();
             return dalACC_Income.SelectAll();
         }
-/*        public DataTable SelectShow(SqlInt32 HospitalID)
+        public DataTable SelectShowByHospital(SqlInt32 HospitalID)
         {
             ACC_IncomeDAL aCC_IncomeDAL = new ACC_IncomeDAL();
-            return aCC_IncomeDAL.SelectShow(HospitalID);
-        }*/
+            return aCC_IncomeDAL.SelectShowByHospital(HospitalID);
+        }
         public DataTable SelectShow(SqlInt32 FinYearID, SqlInt32 HospitalID, SqlInt32 IncomeTypeID)
         {
             ACC_IncomeDAL dalACC_IncomeDAL = new ACC_IncomeDAL();
@@ -170,6 +170,7 @@ namespace GNForm3C.BAL
             ACC_IncomeDAL dalACC_Income = new ACC_IncomeDAL();
             return dalACC_Income.SelectComboBox();
         }
+      
 
         #endregion ComboBox
 

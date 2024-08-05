@@ -123,11 +123,125 @@ public partial class AdminPanel_ACC_Transaction_ACC_TransactionList : System.Web
         Int32 TotalRecords = 0;
 		Int32 TotalPages = 1;
 
-		#endregion Parameters
-		
+        #endregion Parameters
+
         #region Gather Data
-        
-		if (txtPatient.Text.Trim() != String.Empty)
+
+        if (Request.QueryString["HospitalID"] != null)
+        {
+            if (!Page.IsPostBack)
+            {
+                HospitalID = CommonFunctions.DecryptBase64Int32(Request.QueryString["HospitalID"]);
+            }
+            else
+            {
+
+                if (txtPatient.Text.Trim() != String.Empty)
+                    Patient = txtPatient.Text.Trim();
+
+                if (ddlTreatmentID.SelectedIndex > 0)
+                    TreatmentID = Convert.ToInt32(ddlTreatmentID.SelectedValue);
+
+                if (txtAmount.Text.Trim() != String.Empty)
+                    Amount = Convert.ToDecimal(txtAmount.Text.Trim());
+
+                if (txtSerialNo.Text.Trim() != String.Empty)
+                    SerialNo = Convert.ToInt32(txtSerialNo.Text.Trim());
+
+                if (txtReferenceDoctor.Text.Trim() != String.Empty)
+                    ReferenceDoctor = txtReferenceDoctor.Text.Trim();
+
+                if (txtCount.Text.Trim() != String.Empty)
+                    Count = Convert.ToInt32(txtCount.Text.Trim());
+
+                if (txtReceiptNo.Text.Trim() != String.Empty)
+                    ReceiptNo = Convert.ToInt32(txtReceiptNo.Text.Trim());
+
+                if (dtpDate.Text.Trim() != String.Empty)
+                    Date = Convert.ToDateTime(dtpDate.Text.Trim());
+
+                if (dtpDateOfAdmission.Text.Trim() != String.Empty)
+                    DateOfAdmission = Convert.ToDateTime(dtpDateOfAdmission.Text.Trim());
+
+                if (dtpDateOfDischarge.Text.Trim() != String.Empty)
+                    DateOfDischarge = Convert.ToDateTime(dtpDateOfDischarge.Text.Trim());
+
+                if (txtDeposite.Text.Trim() != String.Empty)
+                    Deposite = Convert.ToDecimal(txtDeposite.Text.Trim());
+
+                if (txtNetAmount.Text.Trim() != String.Empty)
+                    NetAmount = Convert.ToDecimal(txtNetAmount.Text.Trim());
+
+                if (txtNoOfDays.Text.Trim() != String.Empty)
+                    NoOfDays = Convert.ToInt32(txtNoOfDays.Text.Trim());
+
+                if (ddlHospitalID.SelectedIndex > 0)
+                    HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
+
+                if (ddlFinYearID.SelectedIndex > 0)
+                    FinYearID = Convert.ToInt32(ddlFinYearID.SelectedValue);
+
+                if (ddlReceiptTypeID.SelectedIndex > 0)
+                    ReceiptTypeID = Convert.ToInt32(ddlReceiptTypeID.SelectedValue);
+            }
+        }
+        else
+        {
+
+
+            if (txtPatient.Text.Trim() != String.Empty)
+                Patient = txtPatient.Text.Trim();
+
+            if (ddlTreatmentID.SelectedIndex > 0)
+                TreatmentID = Convert.ToInt32(ddlTreatmentID.SelectedValue);
+
+            if (txtAmount.Text.Trim() != String.Empty)
+                Amount = Convert.ToDecimal(txtAmount.Text.Trim());
+
+            if (txtSerialNo.Text.Trim() != String.Empty)
+                SerialNo = Convert.ToInt32(txtSerialNo.Text.Trim());
+
+            if (txtReferenceDoctor.Text.Trim() != String.Empty)
+                ReferenceDoctor = txtReferenceDoctor.Text.Trim();
+
+            if (txtCount.Text.Trim() != String.Empty)
+                Count = Convert.ToInt32(txtCount.Text.Trim());
+
+            if (txtReceiptNo.Text.Trim() != String.Empty)
+                ReceiptNo = Convert.ToInt32(txtReceiptNo.Text.Trim());
+
+            if (dtpDate.Text.Trim() != String.Empty)
+                Date = Convert.ToDateTime(dtpDate.Text.Trim());
+
+            if (dtpDateOfAdmission.Text.Trim() != String.Empty)
+                DateOfAdmission = Convert.ToDateTime(dtpDateOfAdmission.Text.Trim());
+
+            if (dtpDateOfDischarge.Text.Trim() != String.Empty)
+                DateOfDischarge = Convert.ToDateTime(dtpDateOfDischarge.Text.Trim());
+
+            if (txtDeposite.Text.Trim() != String.Empty)
+                Deposite = Convert.ToDecimal(txtDeposite.Text.Trim());
+
+            if (txtNetAmount.Text.Trim() != String.Empty)
+                NetAmount = Convert.ToDecimal(txtNetAmount.Text.Trim());
+
+            if (txtNoOfDays.Text.Trim() != String.Empty)
+                NoOfDays = Convert.ToInt32(txtNoOfDays.Text.Trim());
+
+            if (ddlHospitalID.SelectedIndex > 0)
+                HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
+
+            if (ddlFinYearID.SelectedIndex > 0)
+                FinYearID = Convert.ToInt32(ddlFinYearID.SelectedValue);
+
+            if (ddlReceiptTypeID.SelectedIndex > 0)
+                ReceiptTypeID = Convert.ToInt32(ddlReceiptTypeID.SelectedValue);
+        }
+
+
+
+/*
+        if (txtPatient.Text.Trim() != String.Empty)
 			Patient = txtPatient.Text.Trim();
 
 		if (ddlTreatmentID.SelectedIndex > 0)
@@ -173,7 +287,7 @@ public partial class AdminPanel_ACC_Transaction_ACC_TransactionList : System.Web
 			FinYearID = Convert.ToInt32(ddlFinYearID.SelectedValue);
 
 		if (ddlReceiptTypeID.SelectedIndex > 0)
-			ReceiptTypeID = Convert.ToInt32(ddlReceiptTypeID.SelectedValue);
+			ReceiptTypeID = Convert.ToInt32(ddlReceiptTypeID.SelectedValue);*/
 
 
         #endregion Gather Data
@@ -197,6 +311,11 @@ public partial class AdminPanel_ACC_Transaction_ACC_TransactionList : System.Web
             rpData.DataSource = dt;
             rpData.DataBind();
 
+            if (Request.QueryString["HospitalID"] != null)
+            {
+                HospitalID = CommonFunctions.DecryptBase64Int32(Request.QueryString["HospitalID"]);
+                ddlHospitalID.SelectedIndex = Convert.ToInt32(HospitalID.ToString());
+            }
             if (PageNo > TotalPages)            
                 PageNo = TotalPages;
 				
