@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ACC_IncomeExpense_HospitalWise_FinYearWise" targetNamespace="http://tempuri.org/ACC_IncomeExpense_HospitalWise_FinYearWise.xsd" xmlns:mstns="http://tempuri.org/ACC_IncomeExpense_HospitalWise_FinYearWise.xsd" xmlns="http://tempuri.org/ACC_IncomeExpense_HospitalWise_FinYearWise.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ACC_IncomeExpense_HospitalWise_FinYearWise" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="ACC_IncomeExpense_HospitalWise_FinYearWise" msprop:Generator_DataSetName="ACC_IncomeExpense_HospitalWise_FinYearWise">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dt_ACC_IncomeExpense_HospitalWise_FinyearWise" msprop:Generator_RowEvHandlerName="dt_ACC_IncomeExpense_HospitalWise_FinyearWiseRowChangeEventHandler" msprop:Generator_RowDeletedName="dt_ACC_IncomeExpense_HospitalWise_FinyearWiseRowDeleted" msprop:Generator_RowDeletingName="dt_ACC_IncomeExpense_HospitalWise_FinyearWiseRowDeleting" msprop:Generator_RowEvArgName="dt_ACC_IncomeExpense_HospitalWise_FinyearWiseRowChangeEvent" msprop:Generator_TablePropName="dt_ACC_IncomeExpense_HospitalWise_FinyearWise" msprop:Generator_RowChangedName="dt_ACC_IncomeExpense_HospitalWise_FinyearWiseRowChanged" msprop:Generator_RowChangingName="dt_ACC_IncomeExpense_HospitalWise_FinyearWiseRowChanging" msprop:Generator_TableClassName="dt_ACC_IncomeExpense_HospitalWise_FinyearWiseDataTable" msprop:Generator_RowClassName="dt_ACC_IncomeExpense_HospitalWise_FinyearWiseRow" msprop:Generator_TableVarName="tabledt_ACC_IncomeExpense_HospitalWise_FinyearWise" msprop:Generator_UserTableName="dt_ACC_IncomeExpense_HospitalWise_FinyearWise">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FinYearName" msprop:Generator_ColumnPropNameInRow="FinYearName" msprop:Generator_ColumnPropNameInTable="FinYearNameColumn" msprop:Generator_ColumnVarNameInTable="columnFinYearName" msprop:Generator_UserColumnName="FinYearName" type="xs:string" minOccurs="0" />
+              <xs:element name="Hospital" msprop:Generator_ColumnPropNameInRow="Hospital" msprop:Generator_ColumnPropNameInTable="HospitalColumn" msprop:Generator_ColumnVarNameInTable="columnHospital" msprop:Generator_UserColumnName="Hospital" type="xs:string" minOccurs="0" />
+              <xs:element name="TotalIncome" msprop:Generator_ColumnPropNameInRow="TotalIncome" msprop:Generator_ColumnPropNameInTable="TotalIncomeColumn" msprop:Generator_ColumnVarNameInTable="columnTotalIncome" msprop:Generator_UserColumnName="TotalIncome" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TotalExpense" msprop:Generator_ColumnPropNameInRow="TotalExpense" msprop:Generator_ColumnPropNameInTable="TotalExpenseColumn" msprop:Generator_ColumnVarNameInTable="columnTotalExpense" msprop:Generator_UserColumnName="TotalExpense" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TotalPatients" msprop:Generator_ColumnPropNameInRow="TotalPatients" msprop:Generator_ColumnPropNameInTable="TotalPatientsColumn" msprop:Generator_ColumnVarNameInTable="columnTotalPatients" msprop:Generator_UserColumnName="TotalPatients" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -38,14 +38,18 @@
                         <asp:Label SkinID="lblSearchHeaderIcon" runat="server"></asp:Label>
                         <asp:Label ID="lblSearchHeader" SkinID="lblSearchHeaderText" runat="server"></asp:Label>
                     </div>
+
+
                     <div class="tools">
                         <a href="javascript:;" class="collapse pull-right"></a>
                     </div>
+
                 </div>
                 <div class="portlet-body form">
                     <div role="form">
                         <div class="form-body">
                             <div class="row">
+
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="input-group">
@@ -56,6 +60,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="input-group">
@@ -66,6 +71,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="input-group">
@@ -76,6 +82,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="row">
 
@@ -89,6 +96,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
@@ -99,6 +107,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                         <div class="form-actions">
@@ -107,6 +116,7 @@
                                     <asp:Button ID="btnSearch" SkinID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
                                     <asp:Button ID="btnClear" runat="server" SkinID="btnClear" Text="Clear" OnClick="btnClear_Click" />
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -115,6 +125,8 @@
         </ContentTemplate>
     </asp:UpdatePanel>
     <%-- End Search --%>
+
+
     <!-- Add this section below the Search section or where appropriate -->
 
     <%-- List --%>
@@ -125,6 +137,7 @@
                     <ucMessage:ShowMessage ID="ucMessage" runat="server" ViewStateMode="Disabled" />
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-md-12">
                     <!-- BEGIN EXAMPLE TABLE PORTLET-->
@@ -142,8 +155,8 @@
                                 <div>
                                     <asp:HyperLink SkinID="hlAddMany" ID="HyperLink1" NavigateUrl="~/AdminPanel/Account/ACC_Income/ACC_IncomeAddEditMany.aspx" runat="server"></asp:HyperLink>
                                     <asp:HyperLink SkinID="hlAddNew" ID="hlAddNew" NavigateUrl="~/AdminPanel/Account/ACC_Income/ACC_IncomeAddEdit.aspx" runat="server"></asp:HyperLink>
-                                    
-                                   
+
+
                                     <asp:LinkButton runat="server" SkinID="lbtnDeleteMultiple" OnClick="btnDeleteSelected_Click" ToolTip="Delete Record">
                                     </asp:LinkButton>
 
@@ -212,16 +225,16 @@
                                                             </td>
                                                             <td class="text-right">
                                                                 <%#Eval("Amount",GNForm3C.CV.DefaultCurrencyFormatWithDecimalPoint) %>
-                                                        </td>
+                                                            </td>
                                                             <td class="text-center">
                                                                 <%#Eval("IncomeDate", GNForm3C.CV.DefaultDateFormatForGrid) %>
-                                                        </td>
+                                                            </td>
                                                             <td>
                                                                 <%#Eval("Hospital") %>
-                                                        </td>
+                                                            </td>
                                                             <td>
                                                                 <%#Eval("FinYearName") %>
-                                                        </td>
+                                                            </td>
                                                             <td class="text-nowrap text-center">
                                                                 <asp:HyperLink ID="hlView" SkinID="View" NavigateUrl='<%# "~/AdminPanel/Account/ACC_Income/ACC_IncomeView.aspx?IncomeID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("IncomeID").ToString()) %>' data-target="#viewiFrameReg" data-toggle="modal" runat="server"></asp:HyperLink>
                                                                 <asp:HyperLink ID="hlEdit" SkinID="Edit" NavigateUrl='<%# "~/AdminPanel/Account/ACC_Income/ACC_IncomeAddEdit.aspx?IncomeID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("IncomeID").ToString()) %>' runat="server"></asp:HyperLink>
@@ -230,7 +243,7 @@
                                                                     OnClientClick="javascript:return confirm('Are you sure you want to delete record ? ');"
                                                                     CommandName="DeleteRecord"
                                                                     CommandArgument='<%#Eval("IncomeID") %>'>
-                                                            </asp:LinkButton>
+                                                                </asp:LinkButton>
                                                             </td>
                                                         </tr>
                                                     </ItemTemplate>
@@ -240,7 +253,6 @@
 
                                         </table>
                                     </div>
-
                                     <%-- Pagination --%>
                                     <div class="row">
                                         <div class="col-md-4">
@@ -249,7 +261,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div class="dataTables_paginate paging_simple_numbers" runat="server" id="Div_Pagination">
-                                                <ul class="pKDKDagination">
+                                                <ul class="pagination">
                                                     <li class="paginate_button previous disabled" id="liFirstPage" runat="server">
                                                         <asp:LinkButton ID="lbtnFirstPage" Enabled="false" OnClick="PageChange_Click" CommandName="FirstPage" CommandArgument="1" runat="server"><i class="fa fa-angle-double-left"></i></asp:LinkButton></li>
                                                     <li class="paginate_button previous disabled" id="liPrevious" runat="server">
@@ -301,6 +313,7 @@
     </asp:UpdatePanel>
     <%-- END List --%>
 
+
     <%-- Loading  --%>
     <asp:UpdateProgress ID="upr" runat="server">
         <ProgressTemplate>
@@ -312,6 +325,7 @@
     </asp:UpdateProgress>
     <%-- END Loading  --%>
 </asp:Content>
+
 <asp:Content ID="Content5" ContentPlaceHolderID="cphScripts" runat="Server">
     <script>
 
@@ -322,4 +336,5 @@
         SearchGridUI('<%=btnSearch.ClientID%>', 'sample_1', 1);
     </script>
 </asp:Content>
+
 

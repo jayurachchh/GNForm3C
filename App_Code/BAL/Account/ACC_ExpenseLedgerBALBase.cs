@@ -49,5 +49,16 @@ public class ACC_ExpenseLedgerBALBase
         return dalACC_Expense.SelectPage(PageOffset, PageSize, out TotalRecords, FromDate, ToDate, Type);
     }
 
+    public DataTable Report_HospitalWiseFinyearWiseIncomeExpense()
+    {
+        ACC_ExpenseLedgerDAL dalACC_Expense = new ACC_ExpenseLedgerDAL();
+        return dalACC_Expense.Report_HospitalWiseFinyearWiseIncomeExpense();
+    }
+
+    public DataTable Report_HospitalWiseIncomeExpenseLedger(SqlInt32 FinYearID, SqlInt32 HospitalID)
+    {
+        ACC_ExpenseLedgerDAL dalACC_Expense = new ACC_ExpenseLedgerDAL();
+        return dalACC_Expense.Report_HospitalWiseIncomeExpenseLedger(FinYearID,HospitalID);
+    }
     #endregion SelectOperation
 }

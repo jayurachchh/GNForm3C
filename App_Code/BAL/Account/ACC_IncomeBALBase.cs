@@ -80,10 +80,10 @@ namespace GNForm3C.BAL
 
         #region UpsertOperation
 
-        public Boolean Upsert(ACC_IncomeENT entACC_Income)
+        public Boolean Upsert(DataTable dtIncomeTable)
         {
             ACC_IncomeDAL dalACC_Income = new ACC_IncomeDAL();
-            if (dalACC_Income.Upsert(entACC_Income))
+            if (dalACC_Income.Upsert(dtIncomeTable))
             {
                 return true;
             }
@@ -93,6 +93,24 @@ namespace GNForm3C.BAL
                 return false;
             }
         }
+
+        #region UpsertOpration XML
+        public Boolean Upsertxml(string xmlData)
+        {
+            ACC_IncomeDAL dalACC_Income = new ACC_IncomeDAL();
+            if (dalACC_Income.Upsertxml(xmlData))
+            {
+                return true;
+            }
+            else
+            {
+                this.Message = dalACC_Income.Message;
+                return false;
+            }
+        }
+
+
+        #endregion UpsertOpration XML
 
         #endregion UpsertOperation
 
@@ -128,6 +146,7 @@ namespace GNForm3C.BAL
                 return false;
             }
         }
+
         #region SelectOperation
 
         public ACC_IncomeENT SelectPK(SqlInt32 IncomeID)
@@ -170,9 +189,20 @@ namespace GNForm3C.BAL
             ACC_IncomeDAL dalACC_Income = new ACC_IncomeDAL();
             return dalACC_Income.SelectComboBox();
         }
-      
+
 
         #endregion ComboBox
+
+
+
+        #region RDLC (Reports)
+        public DataTable Report_ACC_Income_ByFinYear()
+        {
+            ACC_IncomeDAL dalACC_Income = new ACC_IncomeDAL();
+            return dalACC_Income.Report_ACC_Income_ByFinYear();
+        }
+
+        #endregion RDLC (Reports)
 
     }
 

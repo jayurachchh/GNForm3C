@@ -133,6 +133,39 @@ namespace GNForm3C
             ddl.DataBind();
             ddl.Items.Insert(0, new ListItem("Select Hospital", "-99"));
         }
+        public static void FillDropDownListPatientID(DropDownList ddl)
+        {
+           ACC_GNTransactionBAL aCC_GNTransactionBAL = new ACC_GNTransactionBAL();
+            ddl.DataSource = aCC_GNTransactionBAL.SelectComboBox();
+            ddl.DataValueField = "PatientID";
+            ddl.DataTextField = "Patient";
+            ddl.DataBind();
+            ddl.Items.Insert(0, new ListItem("Select Patient", "-99"));
+        }
+        public static void FillDropDownListTreatmentIDByHospitalID(DropDownList ddl, SqlInt32 HospitalID)
+        {
+            MST_TreatmentBAL balMST_Treatment = new MST_TreatmentBAL();
+            ddl.DataSource = balMST_Treatment.SelectComboBoxByHospitalID(HospitalID);
+            ddl.DataValueField = "TreatmentID";
+            ddl.DataTextField = "Treatment";
+            ddl.DataBind();
+            ddl.Items.Insert(0, new ListItem("Select Treatment", "-99"));
+        }
+        public static void FillSingleDropDownListFinYearIDGNTransaction(DropDownList ddl)
+        {
+            MST_FinYearBAL balMST_FinYear = new MST_FinYearBAL();
+            ddl.DataSource = balMST_FinYear.SelectComboBox();
+            ddl.DataValueField = "FinYearID";
+            ddl.DataTextField = "FinYearName";
+            ddl.DataBind();
+            ddl.Items.Insert(0, new ListItem("Select FinYear", "-99"));
+
+            if (ddl.Items.Count > 0)
+            {
+                ddl.SelectedIndex = 1;
+            }
+        }
+
         public static void FillDropDownListIncomeTypeIDByFinYearID(DropDownList ddl, SqlInt32 FinYearID, SqlInt32 HospitalID)
         {
             MST_IncomeTypeBAL balMST_IncomeType = new MST_IncomeTypeBAL();

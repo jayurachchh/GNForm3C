@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MST_Patient_IDCard" targetNamespace="http://tempuri.org/MST_Patient_IDCard.xsd" xmlns:mstns="http://tempuri.org/MST_Patient_IDCard.xsd" xmlns="http://tempuri.org/MST_Patient_IDCard.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="MST_Patient_IDCard" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="MST_Patient_IDCard" msprop:Generator_DataSetName="MST_Patient_IDCard">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dt_MST_Patient_IDCard" msprop:Generator_RowEvHandlerName="dt_MST_Patient_IDCardRowChangeEventHandler" msprop:Generator_RowDeletedName="dt_MST_Patient_IDCardRowDeleted" msprop:Generator_RowDeletingName="dt_MST_Patient_IDCardRowDeleting" msprop:Generator_RowEvArgName="dt_MST_Patient_IDCardRowChangeEvent" msprop:Generator_TablePropName="dt_MST_Patient_IDCard" msprop:Generator_RowChangedName="dt_MST_Patient_IDCardRowChanged" msprop:Generator_UserTableName="dt_MST_Patient_IDCard" msprop:Generator_RowChangingName="dt_MST_Patient_IDCardRowChanging" msprop:Generator_RowClassName="dt_MST_Patient_IDCardRow" msprop:Generator_TableClassName="dt_MST_Patient_IDCardDataTable" msprop:Generator_TableVarName="tabledt_MST_Patient_IDCard">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PatientName" msprop:Generator_ColumnPropNameInTable="PatientNameColumn" msprop:Generator_ColumnPropNameInRow="PatientName" msprop:Generator_UserColumnName="PatientName" msprop:Generator_ColumnVarNameInTable="columnPatientName" type="xs:string" minOccurs="0" />
+              <xs:element name="DOB" msprop:Generator_ColumnPropNameInTable="DOBColumn" msprop:Generator_ColumnPropNameInRow="DOB" msprop:Generator_UserColumnName="DOB" msprop:Generator_ColumnVarNameInTable="columnDOB" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Age" msprop:Generator_ColumnPropNameInTable="AgeColumn" msprop:Generator_ColumnPropNameInRow="Age" msprop:Generator_UserColumnName="Age" msprop:Generator_ColumnVarNameInTable="columnAge" type="xs:int" minOccurs="0" />
+              <xs:element name="MobileNo" msprop:Generator_ColumnPropNameInTable="MobileNoColumn" msprop:Generator_ColumnPropNameInRow="MobileNo" msprop:Generator_UserColumnName="MobileNo" msprop:Generator_ColumnVarNameInTable="columnMobileNo" type="xs:string" minOccurs="0" />
+              <xs:element name="PrimaryDesc" msprop:Generator_ColumnPropNameInTable="PrimaryDescColumn" msprop:Generator_ColumnPropNameInRow="PrimaryDesc" msprop:Generator_UserColumnName="PrimaryDesc" msprop:Generator_ColumnVarNameInTable="columnPrimaryDesc" type="xs:string" minOccurs="0" />
+              <xs:element name="PatientPhotoPath" msprop:Generator_ColumnPropNameInTable="PatientPhotoPathColumn" msprop:Generator_ColumnPropNameInRow="PatientPhotoPath" msprop:Generator_UserColumnName="PatientPhotoPath" msprop:Generator_ColumnVarNameInTable="columnPatientPhotoPath" type="xs:string" minOccurs="0" />
+              <xs:element name="HospitalID" msprop:Generator_ColumnPropNameInTable="HospitalIDColumn" msprop:Generator_ColumnPropNameInRow="HospitalID" msprop:Generator_UserColumnName="HospitalID" msprop:Generator_ColumnVarNameInTable="columnHospitalID" type="xs:int" minOccurs="0" />
+              <xs:element name="Hospital" msprop:Generator_ColumnPropNameInTable="HospitalColumn" msprop:Generator_ColumnPropNameInRow="Hospital" msprop:Generator_UserColumnName="Hospital" msprop:Generator_ColumnVarNameInTable="columnHospital" type="xs:string" minOccurs="0" />
+              <xs:element name="FinYearID" msprop:Generator_ColumnPropNameInTable="FinYearIDColumn" msprop:Generator_ColumnPropNameInRow="FinYearID" msprop:Generator_UserColumnName="FinYearID" msprop:Generator_ColumnVarNameInTable="columnFinYearID" type="xs:int" minOccurs="0" />
+              <xs:element name="FinYearName" msprop:Generator_ColumnPropNameInTable="FinYearNameColumn" msprop:Generator_ColumnPropNameInRow="FinYearName" msprop:Generator_UserColumnName="FinYearName" msprop:Generator_ColumnVarNameInTable="columnFinYearName" type="xs:string" minOccurs="0" />
+              <xs:element name="PatientID" msprop:Generator_ColumnPropNameInTable="PatientIDColumn" msprop:Generator_ColumnPropNameInRow="PatientID" msprop:Generator_UserColumnName="PatientID" msprop:Generator_ColumnVarNameInTable="columnPatientID" type="xs:int" minOccurs="0" />
+              <xs:element name="BarCode" msprop:Generator_ColumnPropNameInTable="BarCodeColumn" msprop:Generator_ColumnPropNameInRow="BarCode" msprop:Generator_UserColumnName="BarCode" msprop:Generator_ColumnVarNameInTable="columnBarCode" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="PatientImageB" msprop:Generator_ColumnPropNameInTable="PatientImageBColumn" msprop:Generator_ColumnPropNameInRow="PatientImageB" msprop:Generator_UserColumnName="PatientImageB" msprop:Generator_ColumnVarNameInTable="columnPatientImageB" type="xs:base64Binary" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

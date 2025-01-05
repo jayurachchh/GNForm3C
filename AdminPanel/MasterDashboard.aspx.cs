@@ -85,13 +85,15 @@ public partial class AdminPanel_MasterDashboard : System.Web.UI.Page
     protected void btnShow_Click(object sender, EventArgs e)
     {
         SqlInt32 HospitalID = SqlInt32.Null;
+        //SqlInt32 TreatmentID = SqlInt32.Null;
 
         #region 13.1 NavigateLogic
-        if (Request.QueryString["HospitalID"] != null)
+        if (Request.QueryString["HospitalID"] != null )
         {
             if (!Page.IsPostBack)
             {
                 HospitalID = CommonFunctions.DecryptBase64Int32(Request.QueryString["HospitalID"]);
+               // TreatmentID = CommonFunctions.DecryptBase64Int32(Request.QueryString["TreatmentID"]);
             }
             else
             {
@@ -176,22 +178,52 @@ public partial class AdminPanel_MasterDashboard : System.Web.UI.Page
 
         #region 13.3.3 Day Wise Month Wise TreatmentWise Summary 
 
+        /*        if (totalPatients > 0)
+                {
+
+                    DataTable dtTreatmentWiseSummary = mST_DEF_HospitalSumBALBase.SelectHospitalWiseTreatmentSummary(HospitalID);
+
+                    TreatmentWiseSummary.DataSource = dtTreatmentWiseSummary;
+                    TreatmentWiseSummary.DataBind();
+                    lblNoPatientsRecords.Visible = false;
+                    TreatmentWiseSummary.Visible = true;
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "collapsePanel2", "togglePanel('#Panel3', true);", true);
+                    lblNoPatientsRecords.Visible = true;
+                    TreatmentWiseSummary.Visible = false;
+                }
+                pnltreatsumry.Visible = true;*/
+
         if (totalPatients > 0)
         {
-
             DataTable dtTreatmentWiseSummary = mST_DEF_HospitalSumBALBase.SelectHospitalWiseTreatmentSummary(HospitalID);
-            TreatmentWiseSummary.DataSource = dtTreatmentWiseSummary;
-            TreatmentWiseSummary.DataBind();
+            TreatmentWiseSummaryRepeater.DataSource = dtTreatmentWiseSummary;
+            TreatmentWiseSummaryRepeater.DataBind();
+
+            foreach (RepeaterItem rpcount in TreatmentWiseSummaryRepeater.Items)
+            {
+                HyperLink hlPatientCount = (HyperLink)rpcount.FindControl("hlPatientCount");
+                if (hlPatientCount.Text.Trim() == "0")
+                {
+                    hlPatientCount.NavigateUrl = null;
+                }
+
+            }
+
             lblNoPatientsRecords.Visible = false;
-            TreatmentWiseSummary.Visible = true;
+            TreatmentWiseSummaryRepeater.Visible = true;
         }
         else
         {
-            ScriptManager.RegisterStartupScript(this, GetType(), "collapsePanel2", "togglePanel('#Panel3', true);", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "collapsePanel3", "togglePanel('#Panel3', true);", true);
             lblNoPatientsRecords.Visible = true;
-            TreatmentWiseSummary.Visible = false;
+            TreatmentWiseSummaryRepeater.Visible = false;
         }
-        pnltreatsumry.Visible = true;
+
+        Panel3.Visible = true;
+
         #endregion
 
         #endregion 13.3 Day Wise Month Wise Income/Expense Patient Count

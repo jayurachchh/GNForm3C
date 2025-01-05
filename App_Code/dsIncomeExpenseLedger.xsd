@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsIncomeExpenseLedger" targetNamespace="http://tempuri.org/dsIncomeExpenseLedger.xsd" xmlns:mstns="http://tempuri.org/dsIncomeExpenseLedger.xsd" xmlns="http://tempuri.org/dsIncomeExpenseLedger.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsIncomeExpenseLedger" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="dsIncomeExpenseLedger" msprop:Generator_DataSetName="dsIncomeExpenseLedger">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dt_IncomeExpense" msprop:Generator_RowEvHandlerName="dt_IncomeExpenseRowChangeEventHandler" msprop:Generator_RowDeletedName="dt_IncomeExpenseRowDeleted" msprop:Generator_RowDeletingName="dt_IncomeExpenseRowDeleting" msprop:Generator_RowEvArgName="dt_IncomeExpenseRowChangeEvent" msprop:Generator_TablePropName="dt_IncomeExpense" msprop:Generator_RowChangedName="dt_IncomeExpenseRowChanged" msprop:Generator_UserTableName="dt_IncomeExpense" msprop:Generator_RowChangingName="dt_IncomeExpenseRowChanging" msprop:Generator_RowClassName="dt_IncomeExpenseRow" msprop:Generator_TableClassName="dt_IncomeExpenseDataTable" msprop:Generator_TableVarName="tabledt_IncomeExpense">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FinYearName" msprop:Generator_ColumnPropNameInTable="FinYearNameColumn" msprop:Generator_ColumnPropNameInRow="FinYearName" msprop:Generator_UserColumnName="FinYearName" msprop:Generator_ColumnVarNameInTable="columnFinYearName" type="xs:string" minOccurs="0" />
+              <xs:element name="Hospital" msprop:Generator_ColumnPropNameInTable="HospitalColumn" msprop:Generator_ColumnPropNameInRow="Hospital" msprop:Generator_UserColumnName="Hospital" msprop:Generator_ColumnVarNameInTable="columnHospital" type="xs:string" minOccurs="0" />
+              <xs:element name="TransactionDate" msprop:Generator_ColumnPropNameInTable="TransactionDateColumn" msprop:Generator_ColumnPropNameInRow="TransactionDate" msprop:Generator_UserColumnName="TransactionDate" msprop:Generator_ColumnVarNameInTable="columnTransactionDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TransactionType" msprop:Generator_ColumnPropNameInTable="TransactionTypeColumn" msprop:Generator_ColumnPropNameInRow="TransactionType" msprop:Generator_UserColumnName="TransactionType" msprop:Generator_ColumnVarNameInTable="columnTransactionType" type="xs:string" minOccurs="0" />
+              <xs:element name="IncomeAmount" msprop:Generator_ColumnPropNameInTable="IncomeAmountColumn" msprop:Generator_ColumnPropNameInRow="IncomeAmount" msprop:Generator_UserColumnName="IncomeAmount" msprop:Generator_ColumnVarNameInTable="columnIncomeAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ExpenseAmount" msprop:Generator_ColumnPropNameInTable="ExpenseAmountColumn" msprop:Generator_ColumnPropNameInRow="ExpenseAmount" msprop:Generator_UserColumnName="ExpenseAmount" msprop:Generator_ColumnVarNameInTable="columnExpenseAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Balance" msprop:Generator_ColumnPropNameInTable="BalanceColumn" msprop:Generator_ColumnPropNameInRow="Balance" msprop:Generator_UserColumnName="Balance" msprop:Generator_ColumnVarNameInTable="columnBalance" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Particulars" msprop:Generator_UserColumnName="Particulars" msprop:Generator_ColumnPropNameInTable="ParticularsColumn" msprop:Generator_ColumnPropNameInRow="Particulars" msprop:Generator_ColumnVarNameInTable="columnParticulars" type="xs:string" minOccurs="0" />
+              <xs:element name="IncomeType" msprop:Generator_ColumnPropNameInRow="IncomeType" msprop:Generator_ColumnPropNameInTable="IncomeTypeColumn" msprop:Generator_ColumnVarNameInTable="columnIncomeType" msprop:Generator_UserColumnName="IncomeType" type="xs:string" minOccurs="0" />
+              <xs:element name="ExpenseType" msprop:Generator_ColumnPropNameInRow="ExpenseType" msprop:Generator_ColumnPropNameInTable="ExpenseTypeColumn" msprop:Generator_ColumnVarNameInTable="columnExpenseType" msprop:Generator_UserColumnName="ExpenseType" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

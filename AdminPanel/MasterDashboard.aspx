@@ -68,7 +68,7 @@
 
                                         <div class="col-md-3">
                                             <asp:Button ID="btnShow" SkinID="btnShow" runat="server" Text="Show" OnClick="btnShow_Click" />
-              <%--                              <asp:Button ID="btnClear" runat="server" SkinID="btnClear" Text="Clear" OnClick="btnClear_Click" />--%>
+                                            <%--                              <asp:Button ID="btnClear" runat="server" SkinID="btnClear" Text="Clear" OnClick="btnClear_Click" />--%>
                                         </div>
                                     </div>
                                 </div>
@@ -112,7 +112,7 @@
                                         </a>
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                        <a class="dashboard-stat dashboard-stat-v2 red"  href="<%= "Account/ACC_Expense/ACC_ExpenseList.aspx?HospitalID="+ GNForm3C.CommonFunctions.EncryptBase64(ddlHospitalID.SelectedValue.ToString())%>">
+                                        <a class="dashboard-stat dashboard-stat-v2 red" href="<%= "Account/ACC_Expense/ACC_ExpenseList.aspx?HospitalID="+ GNForm3C.CommonFunctions.EncryptBase64(ddlHospitalID.SelectedValue.ToString())%>">
                                             <div class="visual">
                                                 <i class="fa fa-list"></i>
                                             </div>
@@ -146,7 +146,7 @@
         </ContentTemplate>
     </asp:UpdatePanel>
 
-  <asp:UpdatePanel ID="upmonincm" runat="server" EnableViewState="true" UpdateMode="Conditional" ChildrenAsTriggers="false">
+    <asp:UpdatePanel ID="upmonincm" runat="server" EnableViewState="true" UpdateMode="Conditional" ChildrenAsTriggers="false">
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="btnShow" EventName="Click" />
         </Triggers>
@@ -157,6 +157,7 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="fa fa-bullhorn"></i>Day Wise Monthly Income</span>
+                       
                        
                         </div>
                         <div class="tools">
@@ -255,6 +256,7 @@
                         <div class="caption">
                             <i class="fa fa-bullhorn"></i>Day Wise Monthly Expense</span>
                        
+                       
                         </div>
                         <div class="tools">
                             <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
@@ -338,12 +340,12 @@
         </ContentTemplate>
     </asp:UpdatePanel>
 
-    <asp:UpdatePanel ID="uptreatsumry" runat="server" EnableViewState="true" UpdateMode="Conditional" ChildrenAsTriggers="false">
+    <asp:UpdatePanel ID="TreatmentWiseSummary" runat="server" EnableViewState="true" UpdateMode="Conditional" ChildrenAsTriggers="false">
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="btnShow" EventName="Click" />
         </Triggers>
         <ContentTemplate>
-            <asp:Panel ID="pnltreatsumry" runat="server" Visible="false">
+            <asp:Panel ID="Panel3" runat="server" Visible="false">
                 <!-- BEGIN RESULTS TABLE -->
                 <div class="portlet  box blue">
                     <div class="portlet-title">
@@ -354,34 +356,114 @@
                             <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
                         </div>
                     </div>
-                    <div class="portlet-body ">
+                    <div class="portlet-body">
                         <asp:Label ID="lblNoPatientsRecords" runat="server" Text="No Treatment Summary Records Found" Visible="false" CssClass="text-danger" />
-                        <asp:GridView ID="TreatmentWiseSummary" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered table-hover" ShowFooter="false">
-                            <Columns>
-                                <asp:BoundField DataField="SerialNo" HeaderText="Sr.">
-                                    <HeaderStyle CssClass="TRDark" Font-Bold="true" HorizontalAlign="Center" />
-                                    <ItemStyle HorizontalAlign="Center" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="TreatmentType" HeaderText="Treatment Type" >
-                                    <HeaderStyle CssClass="TRDark" Font-Bold="true" HorizontalAlign="Center" />
-                                    <ItemStyle HorizontalAlign="Center" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="PatientsCount" HeaderText="Patients Count" >
-                                    <HeaderStyle CssClass="TRDark" Font-Bold="true" HorizontalAlign="Center" />
-                                    <ItemStyle HorizontalAlign="Center" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="IncomesAmount" HeaderText="Income Amount"  DataFormatString="{0:C}" >
-                                    <HeaderStyle CssClass="TRDark" Font-Bold="true" HorizontalAlign="Center" />
-                                    <ItemStyle HorizontalAlign="Center" />
-                                </asp:BoundField>
-                            </Columns>
-                        </asp:GridView>
+                        <asp:Repeater ID="TreatmentWiseSummaryRepeater" runat="server">
+                            <HeaderTemplate>
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr class="TRDark">
+                                            <th style="text-align: center; font-weight: bold;">Sr.</th>
+                                            <th style="text-align: center; font-weight: bold;">Treatment Type</th>
+                                            <th style="text-align: center; font-weight: bold;">Patients Count</th>
+                                            <th style="text-align: right; font-weight: bold;">Income Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <tr>
+                                    <td style="text-align: center;">
+                                        <asp:Label ID="lblSerialNo" runat="server" Text='<%# Eval("SerialNo") %>'></asp:Label>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <asp:Label ID="lblTreatmentType" runat="server" Text='<%# Eval("TreatmentType") %>'></asp:Label>
+                                    </td>
+                                    <td style="text-align: center;">
+
+                                        <asp:HyperLink ID="hlPatientCount" SkinID="hlGreen_Grid" NavigateUrl=' <%# "Account/ACC_Transaction/ACC_TransactionList.aspx?HospitalID="+ GNForm3C.CommonFunctions.EncryptBase64(ddlHospitalID.SelectedValue.ToString()) +"&TreatmentID="+ GNForm3C.CommonFunctions.EncryptBase64(Eval("TreatmentID").ToString()) %>' Text='<%# Eval("PatientsCount") %>' runat="server"></asp:HyperLink>
+
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <asp:Label ID="lblIncomesAmount" runat="server" Text='<%# Eval("IncomesAmount", "{0:C}") %>'></asp:Label>
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                            <FooterTemplate>
+                                </tbody>
+                             </table>
+                            </FooterTemplate>
+                        </asp:Repeater>
+
                     </div>
                 </div>
                 <!-- END RESULTS TABLE -->
             </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>
+
+
+<asp:UpdatePanel ID="HospitalWiseIncomeExpense" runat="server" EnableViewState="true" UpdateMode="Conditional" ChildrenAsTriggers="false">
+    <Triggers>
+        <asp:AsyncPostBackTrigger ControlID="btnShow" EventName="Click" />
+    </Triggers>
+    <ContentTemplate>
+        <!-- BEGIN Collapsible Chart Panel -->
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-line-chart"></i> Hospital Wise Income Expense Bar Chart
+                </div>
+                <div class="tools">
+                    <!-- Collapse/Expand link -->
+                    <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <!-- Panel for Chart Display -->
+                <asp:Panel ID="pnBarChart" runat="server" Style="width: 800px; height: 500px;">
+                    <!-- Div for Google Chart -->
+                    <div id="chart_div" style="width: 100%; height: 100%;"></div>
+                </asp:Panel>
+            </div>
+        </div>
+        <!-- END Collapsible Chart Panel -->
+
+        <!-- Google Charts JavaScript -->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', { packages: ['corechart'] });
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+                // Sample data for the chart
+                var data = google.visualization.arrayToDataTable([
+                    ['Treatment Type', 'Patients Count', 'Income Amount'],
+                    ['Treatment A', 10, 200],
+                    ['Treatment B', 15, 300],
+                    ['Treatment C', 20, 400],
+                    ['Treatment D', 25, 500]
+                ]);
+
+                var options = {
+                    title: 'Hospital Wise Income Expense B',
+                    hAxis: { title: 'Treatment Type', titleTextStyle: { color: '#333' } },
+                    vAxis: { minValue: 0 },
+                    legend: { position: 'bottom' },
+                    bars: 'vertical', // Vertical bar chart
+                    height: 500,
+                    width: 800,
+                };
+
+                var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            }
+        </script>
+    </ContentTemplate>
+</asp:UpdatePanel>
+
+
+
 </asp:Content>
 
 <asp:Content ID="Content5" ContentPlaceHolderID="cphScripts" runat="Server">

@@ -28,6 +28,7 @@ namespace GNForm3C
         public static string DefaultCompanyName = "GNForm3C";
         public static string DefaultLogoPath = "~/Images/GNForm3C.jpg";
         public static string DefaultMISShortName = "GNForm3C";
+        public static string DefaultNoImagePath = "~/Default/Images/profile_user.jpg";
 
         #region Default SMS Configuration
 

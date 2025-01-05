@@ -36,7 +36,8 @@
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="btnSave" EventName="Click" />
             <asp:AsyncPostBackTrigger ControlID="ddlHospitalID" />
-         
+            <asp:AsyncPostBackTrigger ControlID="btnAdd" EventName="Click" />
+
         </Triggers>
         <ContentTemplate>
             <asp:UpdatePanel ID="upACC_Income2" runat="server" EnableViewState="true" UpdateMode="Conditional" ChildrenAsTriggers="false">
@@ -209,8 +210,9 @@
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="btnShow" EventName="Click" />
                     <asp:AsyncPostBackTrigger ControlID="btnAdd" EventName="Click" />
+
                     <asp:AsyncPostBackTrigger ControlID="ddlHospitalID" />
-          
+
                 </Triggers>
                 <ContentTemplate>
                     <div class="row">
@@ -283,21 +285,26 @@
                                                                     <td>
                                                                         <asp:DropDownList ID="ddlFinYearID" CssClass="form-control select2me" runat="server"></asp:DropDownList>
                                                                     </td>
-
-
                                                                     <td>
                                                                         <asp:DropDownList ID="ddlIncomeTypeID" CssClass="form-control select2me" runat="server"></asp:DropDownList>
                                                                     </td>
                                                                     <td>
                                                                         <asp:TextBox ID="txtAmount" CssClass="form-control" runat="server" Text='<%#Eval("Amount") %>' PlaceHolder="Enter Amount "></asp:TextBox>
                                                                         <%--<asp:RequiredFieldValidator  ID="rfvAmount" SetFocusOnError="True" Display="Dynamic" runat="server" ControlToValidate="txtAmount" ErrorMessage="Enter Amount"></asp:RequiredFieldValidator>--%>
-                                                                        <asp:HiddenField ID="hdIncomeID" runat="server" Value='<%#Eval("IncomeID ") %>' />
+                                                                        <asp:HiddenField ID="hdIncomeID" runat="server" Value='<%#Eval("IncomeID") %>' />
                                                                     </td>
                                                                     <td>
+                                                                        <div class="input-group input-medium date date-picker" data-date-format='<%=GNForm3C.CV.DefaultHTMLDateFormat.ToString()%>'>
+                                                                            <asp:TextBox ID="dtpIncomeDate" CssClass="form-control" runat="server" placeholder="Income Date" Text='<%#Eval("IncomeDate",GNForm3C.CV.DefaultDateFormat) %>'></asp:TextBox>
+                                                                            <span class="input-group-btn">
+                                                                                <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                                            </span>
+                                                                        </div>
+
                                                                         <%--<asp:TextBox ID="txtIncomeDate" CssClass="form-control" class="calendar" runat="server" Text='<%#Eval("IncomeDate") %>' PlaceHolder="Enter IncomeDate " TextMode="Date"></asp:TextBox>--%>
-                                                                        <asp:TextBox ID="dtpIncomeDate" CssClass="form-control" runat="server"
-                                                                            Text='<%# Bind("IncomeDate", "{0:yyyy-MM-dd}") %>'
-                                                                            PlaceHolder="Enter Income Date" type="date"></asp:TextBox>
+                                                                        <%--<asp:TextBox ID="dtpIncomeDate" CssClass="form-control" runat="server"
+                                                                            Text='<%# Eval("IncomeDate",GNForm3C.CV.DefaultDateFormat) %>'
+                                                                            PlaceHolder="Enter Income Date" type="date"></asp:TextBox>--%>
                                                                         <%--                                                                  <asp:TextBox ID="txtIncomeDate" CssClass="form-control" runat="server" Text='<%#Eval("IncomeDate") %>' PlaceHolder="Enter IncomeDate "></asp:TextBox>--%>
                                                                         <%--<asp:RequiredFieldValidator  ID="rfvIncomeDate" SetFocusOnError="True" Display="Dynamic" runat="server" ControlToValidate="txtIncomeDate" ErrorMessage="Enter Amount"></asp:RequiredFieldValidator>--%>
                                                                     </td>
@@ -328,6 +335,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
         </ContentTemplate>

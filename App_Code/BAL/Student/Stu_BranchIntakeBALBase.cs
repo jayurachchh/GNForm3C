@@ -83,14 +83,44 @@ public class Stu_BranchIntakeBALBase
     #endregion
 
 
-    public void SaveBranchIntakeData(string branch, Dictionary<int, int> yearIntakeData)
-    {
-        Stu_BranchIntakeDAL stu_BranchIntakeDAL = new Stu_BranchIntakeDAL();
-
-        foreach (var yearIntake in yearIntakeData)
+    /*    public void SaveBranchIntakeData(string branch, Dictionary<int, int> yearIntakeData)
         {
-            stu_BranchIntakeDAL.SaveBranchIntakeData(branch, yearIntake.Key, yearIntake.Value);
+            Stu_BranchIntakeDAL stu_BranchIntakeDAL = new Stu_BranchIntakeDAL();
+
+            foreach (var yearIntake in yearIntakeData)
+            {
+                stu_BranchIntakeDAL.SaveBranchIntakeData(branch, yearIntake.Key, yearIntake.Value);
+            }
+           // return true;
+        }*/
+
+    public bool SaveBranchIntakeData(DataTable branchIntakeTable )
+    {
+        try
+        {
+/*            DataTable branchIntakeTable = new DataTable();
+            branchIntakeTable.Columns.Add("Branch", typeof(string));
+            branchIntakeTable.Columns.Add("AdmissionYear", typeof(string));
+            branchIntakeTable.Columns.Add("Intake", typeof(int));
+
+            foreach (var entry in yearIntakeData)
+            {
+                branchIntakeTable.Rows.Add(branch, entry.Key.ToString(), entry.Value);
+            }*/
+
+          //  MST_BranchIntakeDAL dalMST_BranchIntake = new MST_BranchIntakeDAL();
+            Stu_BranchIntakeDAL stu_BranchIntakeDAL = new Stu_BranchIntakeDAL();
+            stu_BranchIntakeDAL.SaveBranchIntakeData(branchIntakeTable);
+            return true;
         }
-       // return true;
+        catch (Exception ex)
+        {
+            //// Handle general exceptions
+            //Message = ExceptionMessage(ex);
+            //if (ExceptionHandler(ex))
+            throw;
+        }
+        return false;   
     }
+
 }

@@ -131,48 +131,117 @@ public partial class AdminPanel_Student_StudentDetails_BranchIntakeAddEdit : Sys
     #endregion 15.0 Search
 
     #region 16.0 MST_BranchIntake Add/Edit
-    protected void btnSave_Click(object sender, EventArgs e)
-    {
-        Stu_BranchIntakeBALBase balMST_BranchIntake = new Stu_BranchIntakeBALBase();
-
-        foreach (RepeaterItem item in rpIntakeData.Items)
+    /*    protected void btnSave_Click(object sender, EventArgs e)
         {
-            Label lblBranch = (Label)item.FindControl("lblBranch");
+            Stu_BranchIntakeBALBase balMST_BranchIntake = new Stu_BranchIntakeBALBase();
 
-            if (lblBranch != null)
+            foreach (RepeaterItem item in rpIntakeData.Items)
             {
-                string branch = lblBranch.Text;
-                Repeater rpAddmissionYearBody = (Repeater)item.FindControl("rpAddmissionYearBody");
+                Label lblBranch = (Label)item.FindControl("lblBranch");
 
-                if (rpAddmissionYearBody != null)
+                if (lblBranch != null)
                 {
-                    Dictionary<int, int> yearIntakeData = new Dictionary<int, int>();
+                    string branch = lblBranch.Text;
+                    Repeater rpAddmissionYearBody = (Repeater)item.FindControl("rpAddmissionYearBody");
 
-                    foreach (RepeaterItem yearItem in rpAddmissionYearBody.Items)
+                    if (rpAddmissionYearBody != null)
                     {
-                        TextBox txtIntake = (TextBox)yearItem.FindControl("txtIntake");
-                        Label lblYear = (Label)yearItem.FindControl("lblYear");
+                        Dictionary<int, int> yearIntakeData = new Dictionary<int, int>();
 
-                        if (txtIntake != null && lblYear != null)
+                        foreach (RepeaterItem yearItem in rpAddmissionYearBody.Items)
                         {
-                            int intake;
-                            int year;
+                            TextBox txtIntake = (TextBox)yearItem.FindControl("txtIntake");
+                            Label lblYear = (Label)yearItem.FindControl("lblYear");
 
-                            if (int.TryParse(txtIntake.Text, out intake) && int.TryParse(lblYear.Text, out year))
+                            if (txtIntake != null && lblYear != null)
                             {
-                                yearIntakeData[year] = intake;
+                                int intake;
+                                int year;
+
+                                if (int.TryParse(txtIntake.Text, out intake) && int.TryParse(lblYear.Text, out year))
+                                {
+                                    yearIntakeData[year] = intake;
+                                }
                             }
                         }
-                    }
 
-                    // Save the intake data for the branch
-                    balMST_BranchIntake.SaveBranchIntakeData(branch, yearIntakeData);
+                        // Save the intake data for the branch
+                        balMST_BranchIntake.SaveBranchIntakeData(branch, yearIntakeData);
+                    }
                 }
             }
-        }
 
-        // Refresh the data
-        Search(1);
+            // Refresh the data
+            Search(1);
+        }*/
+
+
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+        Page.Validate("");
+        if (Page.IsValid)
+        {
+            try
+            {
+                Stu_BranchIntakeBALBase balMST_BranchIntake = new Stu_BranchIntakeBALBase();
+                //STU_StudentBranchIntakeMatrixENT entSTU_StudentBranchIntakeMatrix = new STU_StudentBranchIntakeMatrixENT();
+               Stu_BranchIntakeENT entSTU_StudentBranchIntakeMatrix=new Stu_BranchIntakeENT();
+                DataTable branchIntakeTable = new DataTable();
+                branchIntakeTable.Columns.Add("Branch", typeof(string));
+                branchIntakeTable.Columns.Add("AdmissionYear", typeof(string));
+                branchIntakeTable.Columns.Add("Intake", typeof(int));
+
+
+
+                foreach (RepeaterItem item in rpIntakeData.Items)
+                {
+                    Label lblBranch = (Label)item.FindControl("lblBranch");
+
+                    if (lblBranch != null)
+                    {
+                        Repeater rpAddmissionYearBody = (Repeater)item.FindControl("rpAddmissionYearBody");
+
+                        if (rpAddmissionYearBody != null)
+                        {
+                            foreach (RepeaterItem yearItem in rpAddmissionYearBody.Items)
+                            {
+                                TextBox txtIntake = (TextBox)yearItem.FindControl("txtIntake");
+                                Label lblYear = (Label)yearItem.FindControl("lblYear");
+
+                                if (txtIntake != null && lblYear != null)
+                                {
+                                    int intake;
+                                    int year;
+
+                                    if (int.TryParse(txtIntake.Text, out intake) && int.TryParse(lblYear.Text, out year))
+                                    {
+                                        branchIntakeTable.Rows.Add(lblBranch.Text, year, intake);
+                                    }
+                                }
+                            }
+
+
+                        }
+                    }
+                }
+                if(balMST_BranchIntake.SaveBranchIntakeData(branchIntakeTable))
+                {
+                    ucMessage.ShowSuccess(CommonMessage.RecordSaved());
+                }
+                else
+                {
+                    ucMessage.ShowError(balMST_BranchIntake.Message);
+                }
+
+                // Refresh the data
+                Search(1);
+
+            }
+            catch (Exception ex)
+            {
+                ucMessage.ShowError(ex.Message);
+            }
+        }
     }
 
     #endregion 16.0 MST_BranchIntake Add/Edit

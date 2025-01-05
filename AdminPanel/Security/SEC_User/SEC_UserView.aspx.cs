@@ -52,7 +52,7 @@ public partial class AdminPanel_Security_SEC_User_SEC_UserView: System.Web.UI.Pa
 							lblPassword.Text = Convert.ToString(dr["Password"]);
 
 						if (!dr["Hospital"].Equals(DBNull.Value))
-							lblHospitalID.Text = Convert.ToString(dr["HospitalID"]);
+							lblHospitalID.Text = Convert.ToString(dr["Hospital"]);
 
 						if (!dr["Remarks"].Equals(DBNull.Value))
 							lblRemarks.Text = Convert.ToString(dr["Remarks"]);

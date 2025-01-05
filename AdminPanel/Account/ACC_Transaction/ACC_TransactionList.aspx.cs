@@ -127,11 +127,12 @@ public partial class AdminPanel_ACC_Transaction_ACC_TransactionList : System.Web
 
         #region Gather Data
 
-        if (Request.QueryString["HospitalID"] != null)
+        if (Request.QueryString["HospitalID"] != null  && Request.QueryString["TreatmentID"] != null)
         {
             if (!Page.IsPostBack)
             {
                 HospitalID = CommonFunctions.DecryptBase64Int32(Request.QueryString["HospitalID"]);
+                TreatmentID = CommonFunctions.DecryptBase64Int32(Request.QueryString["TreatmentID"]);
             }
             else
             {
@@ -246,7 +247,7 @@ public partial class AdminPanel_ACC_Transaction_ACC_TransactionList : System.Web
 
 		if (ddlTreatmentID.SelectedIndex > 0)
 			TreatmentID = Convert.ToInt32(ddlTreatmentID.SelectedValue);
-
+y
 		if (txtAmount.Text.Trim() != String.Empty)
 			Amount = Convert.ToDecimal(txtAmount.Text.Trim());
 
@@ -311,10 +312,15 @@ public partial class AdminPanel_ACC_Transaction_ACC_TransactionList : System.Web
             rpData.DataSource = dt;
             rpData.DataBind();
 
-            if (Request.QueryString["HospitalID"] != null)
+            if (Request.QueryString["HospitalID"] != null) 
             {
                 HospitalID = CommonFunctions.DecryptBase64Int32(Request.QueryString["HospitalID"]);
                 ddlHospitalID.SelectedIndex = Convert.ToInt32(HospitalID.ToString());
+            }
+            if (Request.QueryString["TreatmentID"] != null) 
+            {
+                TreatmentID = CommonFunctions.DecryptBase64Int32(Request.QueryString["TreatmentID"]);
+                ddlTreatmentID.SelectedIndex = Convert.ToInt32(TreatmentID.ToString());
             }
             if (PageNo > TotalPages)            
                 PageNo = TotalPages;

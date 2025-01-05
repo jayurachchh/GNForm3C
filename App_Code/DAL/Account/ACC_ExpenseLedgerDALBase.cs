@@ -47,7 +47,7 @@ public class ACC_ExpenseLedgerDALBase: DataBaseConfig
         try
         {
             SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
-            DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_ACC_IncomeExpense_SelectPage");
+            DbCommand dbCMD = sqlDB.GetStoredProcCommand("PP_Ledger_Hospital_Income_Expense");
             sqlDB.AddInParameter(dbCMD, "@PageOffset", SqlDbType.Int, PageOffset);
             sqlDB.AddInParameter(dbCMD, "@PageSize", SqlDbType.Int, PageSize);
             sqlDB.AddOutParameter(dbCMD, "@TotalRecords", SqlDbType.Int,4);
@@ -55,7 +55,7 @@ public class ACC_ExpenseLedgerDALBase: DataBaseConfig
             sqlDB.AddInParameter(dbCMD, "@ToDate", SqlDbType.DateTime, ToDate);
             sqlDB.AddInParameter(dbCMD, "@Type", SqlDbType.VarChar, Type);
 
-            DataTable dtACC_Expense = new DataTable("PR_ACC_IncomeExpense_SelectPage");
+            DataTable dtACC_Expense = new DataTable("PP_Ledger_Hospital_Income_Expense");
 
             DataBaseHelper DBH = new DataBaseHelper();
             DBH.LoadDataTable(sqlDB, dbCMD, dtACC_Expense);
@@ -79,5 +79,72 @@ public class ACC_ExpenseLedgerDALBase: DataBaseConfig
             return null;
         }
     }
+
+    public DataTable Report_HospitalWiseFinyearWiseIncomeExpense()
+    {
+        try
+        {
+            SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+            DbCommand dbCMD = sqlDB.GetStoredProcCommand("PP_HospitalWise_FinYearWise_IncomeExpenseList");
+
+            DataTable dtACC_Expense = new DataTable("PP_HospitalWise_FinYearWise_IncomeExpenseList");
+
+            DataBaseHelper DBH = new DataBaseHelper();
+            DBH.LoadDataTable(sqlDB, dbCMD, dtACC_Expense);
+
+            return dtACC_Expense;
+        }
+        catch (SqlException sqlex)
+        {
+            Message = SQLDataExceptionMessage(sqlex);
+            if (SQLDataExceptionHandler(sqlex))
+                throw;
+            return null;
+        }
+        catch (Exception ex)
+        {
+            Message = ExceptionMessage(ex);
+            if (ExceptionHandler(ex))
+                throw;
+            return null;
+        }
+    }
+
+
+
+    public DataTable Report_HospitalWiseIncomeExpenseLedger(SqlInt32 FinYearID, SqlInt32 HospitalID)
+    {
+        try
+        {
+            SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+            DbCommand dbCMD = sqlDB.GetStoredProcCommand("PP_ACC_Ledger_HospitalWise_IncomeExpense");
+
+            sqlDB.AddInParameter(dbCMD, "@FinYearID", SqlDbType.Int, FinYearID);
+            sqlDB.AddInParameter(dbCMD, "@HospitalID", SqlDbType.Int, HospitalID);
+            
+
+            DataTable dtACC_Expense = new DataTable("PP_ACC_Ledger_HospitalWise_IncomeExpense");
+
+            DataBaseHelper DBH = new DataBaseHelper();
+            DBH.LoadDataTable(sqlDB, dbCMD, dtACC_Expense);
+
+            return dtACC_Expense;
+        }
+        catch (SqlException sqlex)
+        {
+            Message = SQLDataExceptionMessage(sqlex);
+            if (SQLDataExceptionHandler(sqlex))
+                throw;
+            return null;
+        }
+        catch (Exception ex)
+        {
+            Message = ExceptionMessage(ex);
+            if (ExceptionHandler(ex))
+                throw;
+            return null;
+        }
+    }
+
     #endregion
 }

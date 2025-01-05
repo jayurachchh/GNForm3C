@@ -143,44 +143,78 @@ public class Stu_BranchIntakeDALBase:DataBaseConfig
     #endregion Selectoperation
 
     #region SaveBranchIntake Data
-    public Boolean SaveBranchIntakeData(string branch, int admissionYear, int intake)
+    /*   public Boolean SaveBranchIntakeData(string branch, int admissionYear, int intake)
+       {
+           try
+           {
+               // Initialize the SqlDatabase object with the connection string
+               SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+
+               // Create a command object with the stored procedure name
+               DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_BranchIntake_InsertUpdate");
+
+               // Add the parameters to the command
+               sqlDB.AddInParameter(dbCMD, "@Branch", SqlDbType.NVarChar, branch);
+               sqlDB.AddInParameter(dbCMD, "@Year", SqlDbType.Int, admissionYear);
+               sqlDB.AddInParameter(dbCMD, "@Intake", SqlDbType.Int, intake);
+
+               // Execute the command
+               DataBaseHelper DBH = new DataBaseHelper();
+               DBH.ExecuteNonQuery(sqlDB, dbCMD);
+
+               return true;
+           }
+           catch (SqlException sqlex)
+           {
+               // Handle SQL exceptions
+               Message = SQLDataExceptionMessage(sqlex);
+               if (SQLDataExceptionHandler(sqlex))
+                   throw;
+               return false;
+           }
+           catch (Exception ex)
+           {
+               // Handle general exceptions
+               Message = ExceptionMessage(ex);
+               if (ExceptionHandler(ex))
+                   throw;
+               return false;
+           }
+       }*/
+    public bool SaveBranchIntakeData(DataTable branchIntakeTable)
     {
         try
         {
-            // Initialize the SqlDatabase object with the connection string
             SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
-
-            // Create a command object with the stored procedure name
             DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_BranchIntake_InsertUpdate");
 
-            // Add the parameters to the command
-            sqlDB.AddInParameter(dbCMD, "@Branch", SqlDbType.NVarChar, branch);
-            sqlDB.AddInParameter(dbCMD, "@Year", SqlDbType.Int, admissionYear);
-            sqlDB.AddInParameter(dbCMD, "@Intake", SqlDbType.Int, intake);
+            SqlParameter tvpParam = new SqlParameter
+            {
+                ParameterName = "@BranchIntakeData",
+                SqlDbType = SqlDbType.Structured,
+                Value = branchIntakeTable,
+                TypeName = "dbo.BranchIntakeType"
+            };
+            dbCMD.Parameters.Add(tvpParam);
 
-            // Execute the command
-            DataBaseHelper DBH = new DataBaseHelper();
-            DBH.ExecuteNonQuery(sqlDB, dbCMD);
-
+            sqlDB.ExecuteNonQuery(dbCMD);
             return true;
         }
         catch (SqlException sqlex)
         {
-            // Handle SQL exceptions
             Message = SQLDataExceptionMessage(sqlex);
             if (SQLDataExceptionHandler(sqlex))
                 throw;
-            return false;
         }
         catch (Exception ex)
         {
-            // Handle general exceptions
             Message = ExceptionMessage(ex);
             if (ExceptionHandler(ex))
                 throw;
-            return false;
         }
+        return false;
     }
+
     #endregion SaveBranchIntake Data
 
 }

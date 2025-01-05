@@ -8,6 +8,11 @@
     <title></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
+    <!-- Load jQuery first -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Then load Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
 
 
 
@@ -288,6 +293,12 @@
                                             <span class="kt-menu__link-text">Master Dashboard</span>
                                         </a>
                                     </li>
+                                    <li class="nav-item start ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/MasterDashboardFinYear.aspx") %>' class="kt-menu__link ">
+                                            <i class="kt-menu__link-icon flaticon2-architecture-and-city"></i>
+                                            <span class="kt-menu__link-text">Master Dashboard Fin year</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="heading">
@@ -317,8 +328,8 @@
                                     </li>
 
                                     <li class="nav-item  ">
-                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Master/Demo/Demohospital.aspx") %>' class="nav-link ">
-                                            <span class="title">Demo Hospital</span>
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/DataTree/Hospitaldatatree.aspx") %>' class="nav-link ">
+                                            <span class="title"> HospitalDataTree </span>
                                         </a>
                                     </li>
 
@@ -341,6 +352,11 @@
                                     <li class="nav-item  ">
                                         <a href='<%=ResolveClientUrl("~/AdminPanel/Master/MST_ReceiptType/MST_ReceiptTypeList.aspx") %>' class="nav-link ">
                                             <span class="title">Receipt Type</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Master/MST_Patient/MST_PatientList.aspx") %>' class="nav-link ">
+                                            <span class="title">Patient Details</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -371,6 +387,11 @@
                                     <li class="nav-item  ">
                                         <a href='<%=ResolveClientUrl("~/AdminPanel/Account/ACC_Transaction/ACC_TransactionList.aspx") %>' class="nav-link ">
                                             <span class="title">Account Transaction</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Account/ACC_GNTransaction/ACC_GNTransactionList.aspx") %>' class="nav-link ">
+                                            <span class="title">Account GNTransaction</span>
                                         </a>
                                     </li>
                                     <li class="nav-item  ">
@@ -434,6 +455,61 @@
                                     <li class="nav-item  ">
                                         <a href='<%=ResolveClientUrl("~/AdminPanel/Student/StudentDetails/BranchIntakeAddEdit.aspx") %>' class="nav-link ">
                                             <span class="title">BranchIntake </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Default2.aspx") %>' class="nav-link ">
+                                            <span class="title">Demo </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-user"></i>
+                                    <span class="title">Report</span>
+                                    <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu" style="display: none;">
+
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Account/ACC_Income/RPT_ACC_Income_List.aspx") %>' class="nav-link ">
+                                            <span class="title">Income List</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Account/ACC_Income/HospitalWiseIncome.aspx") %>' class="nav-link ">
+                                            <span class="title">HospitalWiseIncomeWise </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Account/ACC_Income/RPT_ACCIncome_MatrixBy_IncomeList.aspx") %>' class="nav-link ">
+                                            <span class="title">HospitalWiseIncomeWise Matrix </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Account/ACC_Expense/RPT_ACC_Expense_HospitalWise.aspx") %>' class="nav-link ">
+                                            <span class="title">Hospital Wise Expense</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Account/ACC_Expense/RPT_ACC_Expense_Hospital_DateWise.aspx") %>' class="nav-link ">
+                                            <span class="title">Hospital Wise Date Wise Expense</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Account/ACC_Expense/RPT_HospitalWise_FinYearWise_IncomeExpense.aspx") %>' class="nav-link ">
+                                            <span class="title">Hospital Wise FinYear Wise Income Expense</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Master/MST_Patient/RPT_Patient_IDCard.aspx") %>' class="nav-link ">
+                                            <span class="title">Patient IDCard</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Account/ACC_Expense/RPT_HospitalWise_IncomeExpenseLedger.aspx") %>' class="nav-link ">
+                                            <span class="title">Income Expense Ledger</span>
                                         </a>
                                     </li>
                                 </ul>
