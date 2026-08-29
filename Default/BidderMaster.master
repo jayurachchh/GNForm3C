@@ -1,0 +1,564 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="BidderMaster.master.cs" Inherits="Default_BidderMaster" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title>Bidder Panel</title>
+    <script type="text/javascript">
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            return false;
+        }, false);
+
+        // Attempt to block developer tools (F12, Ctrl+Shift+I, etc.)
+        document.addEventListener('keydown', function (e) {
+            // Block F12
+            if (e.key === 'F12' ||
+                // Block Ctrl+Shift+I
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) ||
+                // Block Ctrl+Shift+J
+                (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) ||
+                // Block Ctrl+Shift+C
+                (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'c')) ||
+                // Block Ctrl+U (view source)
+                (e.ctrlKey && (e.key === 'U' || e.key === 'u'))) {
+                e.preventDefault();
+                return false;
+            }
+        }, false);
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" media="all" type="text/css" />
+
+    <% if (ConfigurationManager.AppSettings.AllKeys.Contains("IsAssetFromCDN") && Convert.ToBoolean(Convert.ToInt32(ConfigurationManager.AppSettings["IsAssetFromCDN"].ToString())))
+        { %>
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://cdn.gnums.in/Default/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.gnums.in/Default/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.gnums.in/Default/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.gnums.in/Default/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.gnums.in/Default/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.gnums.in/Default/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.gnums.in/Default/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.gnums.in/Default/assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.gnums.in/Default/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.gnums.in/Default/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.gnums.in/Default/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.gnums.in/Default/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.gnums.in/Default/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.gnums.in/Default/assets/global/plugins/animate/animate.css" rel="stylesheet" />
+    <link href="https://cdn.gnums.in/Default/assets/global/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="https://cdn.gnums.in/Default/assets/global/css/components.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.gnums.in/Default/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.gnums.in/Default/assets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.gnums.in/Default/assets/layouts/layout3/css/themes/default.min.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="https://cdn.gnums.in/Default/assets/layouts/layout3/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <!-- BEGIN CUSTOM STYLES -->
+    <link href="https://cdn.gnums.in/Default/CSS/Minified/gn-globals-min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.gnums.in/Default/CSS/Minified/gn-custom-min.css" rel="stylesheet" type="text/css" />
+
+    <% }
+        else
+        { %>
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/font-awesome/css/font-awesome.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/simple-line-icons/simple-line-icons.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap/css/bootstrap.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/select2/css/select2.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/select2/css/select2-bootstrap.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/datatables/datatables.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/animate/animate.css")%>" rel="stylesheet" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css")%>" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/css/components.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/css/plugins.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/layouts/layout3/css/layout.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/layouts/layout3/css/themes/default.min.css") %>" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/layouts/layout3/css/custom.min.css") %>" rel="stylesheet" type="text/css" />
+    <!-- BEGIN CUSTOM STYLES -->
+    <link href="<%=ResolveClientUrl("~/Default/CSS/Minified/gn-globals-min.css")%>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/CSS/Minified/gn-custom-min.css")%>" rel="stylesheet" type="text/css" />
+
+    <% } %>
+
+
+
+
+    <link rel="shortcut icon" id="logoicon" runat="server" />
+    <!-- END CUSTOM STYLES -->
+
+
+    <!-- BEGIN BODY -->
+    <style>
+        .page-sidebar .page-sidebar-menu li > a.nav-link, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li > a.nav-link {
+            display: flex !important;
+        }
+
+        .page-footer {
+            /*position: fixed !important;*/
+            left: 0 !important;
+            right: 0 !important;
+            z-index: 10000 !important;
+            bottom: 0 !important;
+        }
+
+        .page-title {
+            box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.08) !important;
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <script>
+        //To Prevent Focus Lost on Post Back in Update Panel
+        var postbackElement = null;
+        function RestoreFocus(source, args) {
+            if (postbackElement != null && postbackElement.id != null) {
+                var PostBackControl = document.getElementById(postbackElement.id);
+
+                if (PostBackControl != null && typeof (PostBackControl.type) !== 'undefined') {
+                    var x = PostBackControl.type;
+
+                    if (x == "select-one")
+                        PostBackControl.focus();
+
+                    if (PostBackControl.classList.contains("btnSave"))
+                        GNScrollToTop();
+                }
+            }
+        }
+        function SavePostbackElement(source, args) {
+            postbackElement = args.get_postBackElement();
+        }
+        function AddRequestHandler() {
+
+            // if (typeof Sys !== 'undefined') {
+            var prm = Sys.WebForms.PageRequestManager.getInstance();
+            prm.add_endRequest(RestoreFocus);
+            prm.add_beginRequest(SavePostbackElement);
+            //  }
+        }
+    </script>
+
+    <!--Google Analytics -->
+    <%= PUMIS.CommonFunctions.GetGoogleAnalyticsCode() %>
+    <!-- Google Analytics -->
+</head>
+<body class="page-header-menu-fixed page-container-bg-solid page-footer-fixed" onload="AddRequestHandler()">
+    <form id="form1" runat="server">
+
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-header">
+                    <div class="page-header-top">
+                        <div class="container-fluid">
+                            <div class="page-logo margin-bottom-10 margin-top-10">
+                                <asp:HyperLink ID="hlLogo" runat="server" NavigateUrl="~/BidderPanel/BID_Bidder_BidderDashboard.aspx" ToolTip="Logo">
+                                    <asp:Image runat="server" ID="imgLogo" Style="max-height: 75px" alt="logo" />
+                                </asp:HyperLink>
+                            </div>
+
+                            <a href="javascript:;" class="menu-toggler"></a>
+
+                            <div class="top-menu">
+                                <ul class="nav navbar-nav pull-right">
+
+                                    <li class="dropdown dropdown-user dropdown-dark">
+                                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                            <asp:Image runat="server" ID="imgCurrentUserPhoto" CssClass="img-circle" AlternateText="" ImageUrl="~/Images/Faculty_NoImg.jpeg" />
+                                            <span class="username username-hide-mobile">
+                                                <i>Hi,</i>
+                                                <asp:Label ID="lblCurrentUsername" CssClass="username username-hide-mobile bold font-green" runat="server" Text="User"></asp:Label>
+                                            </span>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-default">
+                                            <li>
+                                                <asp:LinkButton ID="lbtnMyProfile" TabIndex="-1" OnClick="lbtnMyProfile_Click" CausesValidation="false" runat="server"><i class="icon-user"></i>My Profile</asp:LinkButton>
+                                            </li>
+                                            <li>
+                                                <asp:LinkButton ID="lbtnBankDetails" TabIndex="-1" OnClick="lbtnBankDetails_Click" CausesValidation="false" runat="server"><i class="fa fa-credit-card"></i>Bank Details</asp:LinkButton>
+                                            </li>
+                                            <li>
+                                                <asp:LinkButton ID="lbtnLogout" OnClick="lbtnLogout_Click" CausesValidation="false" runat="server"><i class="icon-lock"></i>Log Out</asp:LinkButton>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-header-menu">
+                        <div class="container-fluid">
+                            <div class="hor-menu">
+                                <ul class="nav navbar-nav">
+                                    <li runat="server">
+                                        <asp:HyperLink ID="hlBidderDashboard" runat="server" NavigateUrl="~/BidderPanel/BID_Bidder_BidderDashboard.aspx" Text="Dashboard"></asp:HyperLink>
+                                    </li>
+                                    <li runat="server" visible="false">
+                                        <asp:HyperLink ID="hlBIDTender" runat="server" NavigateUrl="~/BidderPanel/BID_Bidder_BidderAddMany.aspx" Text="Tender Bid "></asp:HyperLink>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-container">
+            <div class="page-head">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="page-title">
+                                <h1>
+                                    <asp:ContentPlaceHolder ID="cphPageHeader" runat="server">
+                                    </asp:ContentPlaceHolder>
+                                    <small>
+                                        <asp:Label ID="lblPageHeaderBidderName_XXXXX" runat="server"></asp:Label></small>
+                                </h1>
+                            </div>
+                            <div class="page-title pull-right">
+                                <asp:ContentPlaceHolder ID="cphPageHeaderRight" runat="server"></asp:ContentPlaceHolder>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-toolbar">
+                    </div>
+                </div>
+            </div>
+            <div class="page-content" style="min-height: 100vh !important;">
+                <div class="container-fluid">
+                    <ul class="page-breadcrumb breadcrumb" style="padding: 0;">
+                        <asp:ContentPlaceHolder ID="cphBreadcrumb" runat="server" Visible="false" EnableViewState="false">
+                        </asp:ContentPlaceHolder>
+                    </ul>
+                    <asp:ContentPlaceHolder ID="cphPageContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+        <div class="page-footer">
+            <div class="container-fluid">
+                <%=DateTime.Now.Year %> &copy; <%=PUMIS.CV.DefaultUniversityName %>
+            </div>
+        </div>
+
+        <div class="modal fade" id="viewiFrameReg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-body">
+                    <iframe class="auto-height" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" oallowfullscreen msallowfullscreen="true" style="border: 0px; width: 100%;" onload="this.height=this.contentWindow.document.body.scrollHeight;"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="viewiFrameLG" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-body">
+                    <iframe class="auto-height" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" oallowfullscreen msallowfullscreen="true" style="border: 0px; width: 100%;" onload="this.height=this.contentWindow.document.body.scrollHeight;"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="viewiFrameFull" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-full">
+                <div class="modal-body">
+                    <iframe class="auto-height" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" oallowfullscreen msallowfullscreen="true" style="border: 0px; width: 100%;" onload="this.height=this.contentWindow.document.body.scrollHeight;"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-to-top">
+            <i class="icon-arrow-up"></i>
+        </div>
+
+        <% if (ConfigurationManager.AppSettings.AllKeys.Contains("IsAssetFromCDN") && Convert.ToBoolean(Convert.ToInt32(ConfigurationManager.AppSettings["IsAssetFromCDN"].ToString())))
+            { %>
+
+        <!--[if lt IE 9]>
+<script src="https://cdn.gnums.in/Default/assets/global/plugins/respond.min.js"></script>
+<script src="https://cdn.gnums.in/Default/assets/global/plugins/excanvas.min.js"></script> 
+<script src="https://cdn.gnums.in/Default/assets/global/plugins/ie8.fix.min.js"></script> 
+<![endif]-->
+        <!-- BEGIN CORE PLUGINS -->
+
+        <script src="https://cdn.gnums.in/Default/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/global/scripts/datatable.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/global/plugins/bootbox/bootbox.min.js"></script>
+        <script src="https://cdn.gnums.in/Default/assets/global/scripts/app.min.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/global/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/layouts/layout3/scripts/demo.min.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+
+        <script src="https://cdn.gnums.in/Default/global/plugins/tinymce/tinymce.bundle.js"></script>
+        <script src="https://cdn.gnums.in/Default/global/plugins/tinymce/UI_TinyMCE.js"></script>
+
+        <!-- BEGIN CUSTOM SCRIPTS -->
+        <script src="https://cdn.gnums.in/Default/JS/UI_Select2.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/JS/GN_UI.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/JS/CommonValidation.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/JS/CommonJSFunctions.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/JS/UI_ModalEvents.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/JS/UI_BlockUI.js" type="text/javascript"></script>
+        <script src="https://cdn.gnums.in/Default/JS/GN_InitMain.js" type="text/javascript"></script>
+        <!-- END CUSTOM SCRIPTS -->
+
+        <% }
+            else
+            { %>
+
+        <!--[if lt IE 9]>
+<script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/respond.min.js") %>"></script>
+<script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/excanvas.min.js") %>"></script> 
+<script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/ie8.fix.min.js") %>"></script> 
+<![endif]-->
+        <!-- BEGIN CORE PLUGINS -->
+
+        <script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/jquery.min.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap/js/bootstrap.min.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/js.cookie.min.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/jquery.blockui.min.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/jquery-ui/jquery-ui.min.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/select2/js/select2.full.min.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/global/scripts/datatable.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/datatables/datatables.min.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootbox/bootbox.min.js")%>"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/global/scripts/app.min.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/pages/scripts/components-date-time-pickers.min.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js")%>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/layouts/layout3/scripts/layout.min.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/layouts/layout3/scripts/demo.min.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/layouts/global/scripts/quick-sidebar.min.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/assets/layouts/global/scripts/quick-nav.min.js") %>" type="text/javascript"></script>
+
+        <script src="<%=ResolveClientUrl("~/Default/global/plugins/tinymce/tinymce.bundle.js") %>"></script>
+        <script src="<%=ResolveClientUrl("~/Default/global/plugins/tinymce/UI_TinyMCE.js") %>"></script>
+
+        <!-- BEGIN CUSTOM SCRIPTS -->
+        <script src="<%=ResolveClientUrl("~/Default/JS/UI_Select2.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/JS/GN_UI.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/JS/CommonValidation.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/JS/CommonJSFunctions.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/JS/UI_ModalEvents.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/JS/UI_BlockUI.js") %>" type="text/javascript"></script>
+        <script src="<%=ResolveClientUrl("~/Default/JS/GN_InitMain.js") %>" type="text/javascript"></script>
+        <!-- END CUSTOM SCRIPTS -->
+
+        <% } %>
+
+        <script>
+
+            $(document).ready(function () {
+                InitMain.init();
+            });
+
+
+            $(document).ajaxStart(function () {
+
+                funBlockUI();
+
+            }).ajaxStop(function () {
+
+                funUnblockUI();
+
+                InitMain.init();
+
+            });
+
+            jQuery(document).ready(function () {
+
+
+                var pathname = window.location.pathname; // Returns path only
+                var url = window.location.href
+
+            });
+
+            if (typeof Sys !== 'undefined') {
+
+                var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+                prm.add_beginRequest(function () {
+
+                    funBlockUI();
+
+                });
+                prm.add_endRequest(function () {
+
+                    funUnblockUI();
+                    InitMain.init();
+                    //$(".page-header .page-header-menu .hor-menu .navbar-nav>li>a").on("click", function () {
+                    //    if ($(this).parent().hasClass("classic-menu-dropdown")) {
+                    //        if ($(this).parent().hasClass("open opened")) {
+                    //            $(".classic-menu-dropdown").removeClass("open opened");
+                    //            $(".dropdown-submenu").removeClass("open opened");
+                    //            $(this).parent().removeClass("open opened");
+                    //        }
+                    //        else {
+                    //            $(".classic-menu-dropdown").removeClass("open opened");
+                    //            $(".dropdown-submenu").removeClass("open opened");
+                    //            $(this).parent().addClass("open opened");
+                    //        }
+                    //    }
+                    //});
+
+                    //$(".page-header .page-header-menu .hor-menu .navbar-nav>li>ul>li>a").on("click", function () {
+                    //    if ($(this).parent().hasClass("open opened")) {
+                    //        $(".dropdown-submenu").removeClass("open opened");
+                    //        $(this).parent().removeClass("open opened");
+                    //    }
+                    //    else {
+                    //        $(".dropdown-submenu").removeClass("open opened");
+                    //        $(this).parent().addClass("open opened");
+                    //    }
+                    //});
+
+
+                });
+            }
+
+            //$(document).ready(function () {
+            //    $(".page-header .page-header-menu .hor-menu .navbar-nav>li>a").on("click", function () {
+            //        if ($(this).parent().hasClass("classic-menu-dropdown")) {
+            //            if ($(this).parent().hasClass("open opened")) {
+            //                $(".classic-menu-dropdown").removeClass("open opened");
+            //                $(".dropdown-submenu").removeClass("open opened");
+            //                $(this).parent().removeClass("open opened");
+            //            }
+            //            else {
+            //                $(".classic-menu-dropdown").removeClass("open opened");
+            //                $(".dropdown-submenu").removeClass("open opened");
+            //                $(this).parent().addClass("open opened");
+            //            }
+            //        }
+            //    });
+
+            //    $(".page-header .page-header-menu .hor-menu .navbar-nav>li>ul>li>a").on("click", function () {
+            //        if ($(this).parent().hasClass("open opened")) {
+            //            $(".dropdown-submenu").removeClass("open opened");
+            //            $(this).parent().removeClass("open opened");
+            //        }
+            //        else {
+            //            $(".dropdown-submenu").removeClass("open opened");
+            //            $(this).parent().addClass("open opened");
+            //        }
+            //    });
+            //});
+
+            if (typeof Sys !== 'undefined') {
+                var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+                prm.add_beginRequest(function () {
+
+                    funBlockUI();
+                    InitMain.init();
+
+                });
+                prm.add_endRequest(function () {
+
+                    funUnblockUI();
+                    InitMain.init();
+
+
+                    /*Old IFrame Modal BEGIN*/
+                    $('a.GNModalIFrame').on('click', function (e) {
+                        var src = $(this).attr('href');
+                        var target = $(this).attr('data-target');
+
+                        $(target + " iframe").attr({
+                            'src': src
+                        });
+                        e.preventDefault();
+                    });
+
+                    $('.modal .fade').on('hidden.bs.modal', function () {
+                        $(".modal .fade iframe").attr({
+                            'src': 'about:blank'
+                        });
+                    });
+
+                    function closemyModal() {
+                        $('.modal').modal('hide');
+                    }
+
+                    function closeModalAndRefreshPage() {
+                        $('.modal').modal('hide');
+                        location.reload();
+                    }
+
+                    /*Old IFrame Modal END*/
+
+                });
+            }
+
+            /*Old IFrame Modal BEGIN*/
+            $('a.GNModalIFrame').on('click', function (e) {
+                var src = $(this).attr('href');
+                var target = $(this).attr('data-target');
+
+                $(target + " iframe").attr({
+                    'src': src
+                });
+                e.preventDefault();
+            });
+
+            $('.modal .fade').on('hidden.bs.modal', function () {
+                $(".modal .fade iframe").attr({
+                    'src': 'about:blank'
+                });
+            });
+
+            $(document).on("contextmenu", function (e) {
+                e.preventDefault();
+            });
+
+            $(document).keydown(function (event) {
+                if (event.keyCode == 123) {
+                    return false;
+                }
+                else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) {
+                    return false;  //Prevent from ctrl+shift+i
+                }
+            });
+            /*Old IFrame Modal END*/
+        </script>
+
+        <!-- END JAVASCRIPTS -->
+        <asp:ContentPlaceHolder ID="cphScripts" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>
