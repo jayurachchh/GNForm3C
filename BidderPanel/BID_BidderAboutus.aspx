@@ -13,9 +13,6 @@
         /* Hero Section */
         .hero-section {
             background: linear-gradient(135deg, #5C9BD1 0%, #4c87b9 100%);
-            /*#667eea*/
-            /*#764ba2*/
-            color: white;
             padding: 80px 20px 60px;
             text-align: center;
             margin-top: -20px;
